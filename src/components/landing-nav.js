@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import LoginForm from './login-form';
 import '../styles/navbars/landing-nav.css';
 import '../styles/modal.css';
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const LandingNav = () => {
 
@@ -37,29 +38,21 @@ export const LandingNav = () => {
               </div>
             </div>
           );
-      }             
+      }     
+      
+    const { loginWithRedirect } = useAuth0();
 
   return(
-
-  <div className="navbar">
-    <ul className="nav-list">
-        <li className="nav-item">
-            <Link to="/register" className="register-link">Register</Link>
-        </li>
-
-        <li className="nav-item">
-            <button id="login-button" onClick={() => setModalOpen('login')}>Login</button>
-            {modalOpen && (
-                <LoginModal
-                    show={modalOpen === 'login'}
-                    toggleModal={setModalOpen}
-                    title="Login to your RoadRate account"
-                    onClose={onClose}
-                />
-            )}
-        </li>
-    </ul>
-  </div>
+    <div className="navbar">
+        <ul className="nav-list">
+            <li className="nav-item">
+                <Link to="/register" className="register-link">Register</Link>
+            </li>
+            <li className="nav-item">
+                <button onClick={() => loginWithRedirect()}>Login here</button>
+            </li>
+        </ul>
+    </div>
   )
 }
 

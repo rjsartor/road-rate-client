@@ -1,14 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./components/App";
-import {BrowserRouter as Router} from 'react-router-dom';
 import { ModalProvider } from 'react-modal-hook';
+import { BrowserRouter as Router } from 'react-router-dom';
+import App from "./components/App";
+import LoginForm from "./components/login-form";
+import { createRoot } from 'react-dom/client';
 
-ReactDOM.render(
-  <ModalProvider>
-      <Router>
-          <App />
-      </Router>
-  </ModalProvider>,
-  document.getElementById('root')
+const root = createRoot(document.getElementById("root"));
+root.render(
+    <ModalProvider>
+        <App />
+    </ModalProvider>
 );

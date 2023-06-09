@@ -1,15 +1,17 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useNavigation } from 'react-router-dom';
 import LandingNav from './landing-nav';
 import ReviewList from './review-list';
 import About from './about.js';
 import '../styles/pages/landing.css';
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const LandingPage = (props) => {
-    // If we are logged in redirect straight to the user's dashboard
-    if (localStorage.authToken) {
-      return <Redirect to="/dashboard" />;
-    } 
+  
+    const { isAuthenticated } = useAuth0;
+    const navigate = useNavigation();
+
+    if (isAuthenticated) navigate('/dashboard');
 
     return (
       <main className="home">
