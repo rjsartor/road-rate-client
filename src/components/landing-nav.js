@@ -49,7 +49,7 @@ export const LandingNav = () => {
                 <Link to="/register" className="register-link">Register</Link>
             </li>
             <li className="nav-item">
-                <button onClick={() => loginWithRedirect()}>Login here</button>
+                <button onClick={() => loginWithRedirect()}>Login</button>
             </li>
         </ul>
     </div>

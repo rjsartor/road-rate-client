@@ -110,7 +110,6 @@ const navigate = useNavigate();
   // }, [user?.id]);
 
   if (!isAuthenticated) {
-    console.log('should navigage')
     navigate('/');
   }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, useNavigation } from 'react-router-dom';
+import { useNavigation } from 'react-router-dom';
 import LandingNav from './landing-nav';
 import ReviewList from './review-list';
 import About from './about.js';
