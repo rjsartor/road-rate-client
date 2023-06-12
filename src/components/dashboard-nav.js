@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import icon from '../assets/thumbs-up.png';
 import '../styles/navbars/dashboard-nav.css';
+import { useNavigate } from 'react-router-dom';
 
 export const DashboardNav = () => {
+  const navigate = useNavigate();
+  const accessToken = localStorage.getItem('accessToken');
 
   return(
     <main className="dashboard-nav">
       <section className="logo-wrapper">
         <ul className="header-logo">
-          <li className="header">
-          <Link to="/"><h1>RoadRate</h1></Link>
+          <li onClick={() => {
+            navigate(accessToken ? '/dashboard' : '/')}
+          }
+            className="header">
+            <h1>RoadRate</h1>
           </li>
           <li className="icon"><img 
           src={icon} 

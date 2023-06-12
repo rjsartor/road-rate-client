@@ -1,17 +1,22 @@
 import React from 'react';
-import { useNavigation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import LandingNav from './landing-nav';
 import ReviewList from './review-list';
 import About from './about.js';
 import '../styles/pages/landing.css';
 import { useAuth0 } from "@auth0/auth0-react";
 
-export const LandingPage = (props) => {
-  
-    const { isAuthenticated } = useAuth0;
-    const navigate = useNavigation();
+export const LandingPage = () => {
 
-    if (isAuthenticated) navigate('/dashboard');
+    // const accessToken = localStorage.getItem('accessToken');
+    // const navigate = useNavigate();
+
+    // console.log('accessToken', accessToken)
+
+    // if (accessToken) {
+    //   console.log('should nav')
+    //   navigate('/dashboard');
+    // }
 
     return (
       <main className="home">

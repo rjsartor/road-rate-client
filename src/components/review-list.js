@@ -47,23 +47,25 @@ export const ReviewList = () => {
         <Spinner name="line-spin-fade-loader" color="green"/>
       </div>
     )
-
-    let rating;
     if (reviews) {
        review = reviews.map((review, index) => { 
-        let driverComment;
-        if (review.isPositive === 'true') {
-          rating = <MaterialIcon icon="thumb_up" />
-        } else {
-          rating = <MaterialIcon icon="thumb_down" />
-        }
+        const { 
+          isPositive, 
+          ownerResponse, 
+          createdAt, 
+          _id, 
+          plateId, 
+          plateState, 
+          plateNumber,
+          message,
+      } = review;
 
-        if (review.ownerResponse) {
-          driverComment = <p> Driver Response: {review.ownerResponse}</p>
-        }
+        const ratingIcon = isPositive === 'true' 
+          ? <MaterialIcon icon="thumb_up" /> 
+          : <MaterialIcon icon="thumb_down" />
 
         const thisDate = new Date();
-        const date = new Date(review.createdAt)
+        const date = new Date(createdAt)
         const year = date.getFullYear();
         let month = (date.getMonth() + 1).toString();
         const day = date.getDate();
@@ -157,28 +159,28 @@ export const ReviewList = () => {
         }
 
         return (
-          <li className='review-item' key={review._id} index-key={index} tabIndex='0'>
+          <li className='review-item' key={_id} index-key={index} tabIndex='0'>
             <article className='review-header'>
               <article className='review-title'>
-              {/* <img className='isClaimed-icon' src='https://cdn4.iconfinder.com/data/icons/flatastic-11-1/256/user-green-512.png' alt='green user icon'></img> */}
+              <img className='isClaimed-icon' src='https://cdn4.iconfinder.com/data/icons/flatastic-11-1/256/user-green-512.png' alt='green user icon'></img>
               {/* ---- ROUTE TO A SHARABLE PUBLIC PLATE LINK ---- */}
-              <Link to={`/plate/id/${review.plateId}`}>
+              <Link to={`/plate/id/${plateId}`}>
                 <button
                   className="plate-btn"
                 > 
-                  {review.plateNumber} {review.plateState}
+                  {plateNumber} {plateState}
                 </button>    
               </Link> 
               <p className="elapsed-time">{elapsedTime}</p>
               </article>
               <article className='review-rating'>
-                <p className='rating'>{rating}</p>
+                <p className='rating'>{ratingIcon}</p>
               </article>
             </article>       
-            <p className='message'>{review.message}</p>
-            <article className="owner-comment">
-              {driverComment}
-            </article>
+            <p className='message'>{message}</p>
+            {ownerResponse && <article className="owner-comment">
+              <p>Driver Response: {ownerResponse}</p> 
+            </article>}
             <p className='review-date'>{dateString}</p>
           </li>
         )
