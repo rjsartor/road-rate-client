@@ -4,18 +4,15 @@ import { API_BASE_URL } from '../config';
 import PagesNav from './pages-nav';
 import '../styles/plates/claim-plate.css';
 
-export const claimPlate = () => {
+export const ClaimPlate = () => {
   const [ plateNumber, setPlateNumber ] = useState('');
   const [ plateState, setPlateState ] = useState('');
   const [ successMessage, setSuccessMessage ] = useState('');
   const [ plates, setPlates ] = useState('before search');
 
   /* ========= SEARCH LICENSE PLATE TO CLAIM ========== */
-  const handleSubmit = (e) => {
-    
-    if(e){
-      e.preventDefault(); 
-    }
+  const handleSearchPlate = (e) => {
+    e?.preventDefault(); 
 
     return fetch(`${API_BASE_URL}/plates/?state=${plateState}&search=${plateNumber}`, {
       method: 'GET',
@@ -42,10 +39,8 @@ export const claimPlate = () => {
   };
 
  /* ========= POST A NEW PLATE ========== */
-  const handleRegisterPlate = (e) => {
-    if(e){
-      e.preventDefault(); 
-    }
+  const handlePlateRegister = (e) => {
+    e?.preventDefault(); 
     const userId = localStorage.userId;
 
     localStorage.setItem('myPlate', plateNumber.toUpperCase())
@@ -83,9 +78,7 @@ export const claimPlate = () => {
   /* ========= UPDATE AN EXISTING PLATE ========== */
   // PUT to link an existing plate to the current user
   const handleClaimClick = (e) => {
-    if(e){
-      e.preventDefault(); 
-    }
+    e?.preventDefault(); 
     const userId = localStorage.userId;
 
     localStorage.setItem('myPlate', plateNumber)
@@ -174,7 +167,7 @@ export const claimPlate = () => {
           <td>
           <button 
             className='register-plate' 
-            onClick={(e) => handleRegisterPlate(e)}
+            onClick={(e) => handlePlateRegister(e)}
             disabled={successMessage}
           >
             Register Plate
@@ -224,7 +217,7 @@ export const claimPlate = () => {
       <section className="claim-plate-search">
         <form 
             id="claim-search-form"
-            onSubmit={handleSubmit}
+            onSubmit={handleSearchPlate}
           >
           <fieldset id="claim-plate-search">
             <legend>Search a Valid Plate by State</legend>     
@@ -331,5 +324,5 @@ export const claimPlate = () => {
   )
 }
 
-export default claimPlate;
+export default ClaimPlate;
 

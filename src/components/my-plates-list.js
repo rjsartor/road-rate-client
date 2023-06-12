@@ -1,10 +1,11 @@
 import React, { useState, useEffect }  from 'react'; 
 import {API_BASE_URL} from '../config';
-import { Redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import PagesNav from './pages-nav';
 import '../styles/plates/my-plates-list.css'
 
 export const MyPlatesList = () => {
+  const navigate = useNavigate();
   const [ plates, setPlates ] = useState([]);
   const [ redirect, setRedirect ] = useState(false);
 
@@ -36,7 +37,7 @@ export const MyPlatesList = () => {
   let plateEndpoint = `/my-plates/id/${localStorage.myPlateId}`;
 
   if (redirect) {
-    return <Redirect to={plateEndpoint} />
+    return navigate(plateEndpoint);
   }
 
   const noPlatesMessage = () => {

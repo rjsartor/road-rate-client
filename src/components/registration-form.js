@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'; 
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../config';
 
 export const RegistrationForm = () => {
@@ -16,6 +16,8 @@ export const RegistrationForm = () => {
   const [validUsername, SetValidUsername] = useState('')
   const [validPasswordLength, SetValidPasswordLength] = useState(false)
   const [validPasswordCharacters, SetValidPasswordCharacters] = useState(false)
+
+  const navigate = useNavigate();
 
   /* ====== LOGIN USER AFTER SUCCESSFUL REGISTRATION ====== */
   const logIn = data => {
@@ -107,6 +109,7 @@ export const RegistrationForm = () => {
     validateChar(password);
     validatePasswordLength(password);
     validateUsername(username);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username, password]) 
   
    /* ====== HANDLE FORM SUBMIT ====== */
@@ -223,7 +226,7 @@ export const RegistrationForm = () => {
     <section className="registration">
     {
       localStorage.loggedIn ? (
-        <Redirect to="/dashboard" />
+        navigate("/dashboard")
       ) : (
       <article className="registration-form">
         <form className="registration-form"
