@@ -53,7 +53,7 @@ export const PublicPlate = () => {
 
     let driverComment;
 
-    if (reviews) {
+    if (reviews?.length) {
       review = reviews.map((review, index) => { 
         if (review.isPositive === 'true') {
           rating = <MaterialIcon icon="thumb_up" />
