@@ -1,6 +1,7 @@
 import React, { useState } from 'react'; 
 import { API_BASE_URL } from '../config';
 import { Redirect } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -20,72 +21,81 @@ export const LoginForm = () => {
     )
   }
  
-  const handleSubmit = e => {
-    e.preventDefault(e); 
+// const handleSubmit = e => {
+//     e.preventDefault(e); 
 
-    setUsername(username)
-    setLoggedIn(loggedIn)
-    localStorage.removeItem("logout")
+//     setUsername(username)
+//     setLoggedIn(loggedIn)
+//     localStorage.removeItem("logout")
 
-    const headers = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    }
+//     const headers = {
+//       'Content-Type': 'application/json',
+//       'Accept': 'application/json'
+//     }
 
-      return fetch(`${API_BASE_URL}/auth/login`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({
-          username,
-          password
-        })
-      })
-      .then(res => {
-        return res.json();
-      })
-      .then( ( auth ) => {  
-        const { message, code, name } = auth;
-        if(code === 401 || message === 'Unauthorized' || name === 'AuthenticationError') {
-          setAuthError(true)
-          localStorage.setItem("error", name)
-        }
+//       return fetch(`${API_BASE_URL}/auth/login`, {
+//         method: 'POST',
+//         headers,
+//         body: JSON.stringify({
+//           username,
+//           password
+//         })
+//       })
+//       .then(res => {
+//         console.log('res', res)
+//         return res.json();
+//       })
+//       .then( ( auth ) => {  
+//         console.log('auth', auth)
+//         const { message, code, name } = auth;
+//         if(code === 401 || message === 'Unauthorized' || name === 'AuthenticationError') {
+//           setAuthError(true)
+//           localStorage.setItem("error", name)
+//         }
 
-        if (auth.hasOwnProperty("authToken")){
-          localStorage.setItem("user", username);
-          localStorage.setItem("loggedIn", loggedIn);
-          localStorage.setItem("authToken", auth.authToken);
-          localStorage.removeItem("error")
-          setAuthToken(auth)
-        }
-        return auth;
-      })
-      .catch(err => {
-        const { code } = err;
-        const message = code === 401 ? 'Incorrect username or password' : 'Unable to login, please try again';
+//         if (auth.hasOwnProperty("authToken")){
+//           console.log('user', auth.user)
+//           localStorage.setItem("user", JSON.stringify(auth.user));
+//           localStorage.setItem("loggedIn", loggedIn);
+//           localStorage.setItem("authToken", auth.authToken);
+//           localStorage.removeItem("error")
+//           setAuthToken(auth)
+//         }
+//         return auth;
+//       })
+//       .catch(err => {
+//         const { code } = err;
+//         const message = code === 401 ? 'Incorrect username or password' : 'Unable to login, please try again';
+//         console.log('err', err)
         
-        return Promise.reject(
-          new Error({
-            _error: message
-          })
-        )
-      })
-  };
+//         return Promise.reject(
+//           new Error({
+//             _error: message
+//           })
+//         )
+//       })
+//   };
 
-  /* ==== RENDER VALIDATION ERROR MESSAGE ==== */
-  let errorMessage;
-  if(authError && username.length > 0 ){
-    errorMessage = <p>Login Failed. Check your credentials and resubmit.</p>
-    setInterval(function(){ localStorage.removeItem('error') }, 2000);
-  } else if (localStorage.error){
-    errorMessage = <p>Login Failed. Check your credentials and resubmit.</p>
-    setInterval(function(){ localStorage.removeItem('error') }, 2000);
-  } else {
-    errorMessage = <p></p>
-  }
+  // /* ==== RENDER VALIDATION ERROR MESSAGE ==== */
+  // let errorMessage;
+  // if(authError && username.length > 0 ){
+  //   errorMessage = <p>Login Failed. Check your credentials and resubmit.</p>
+  //   setInterval(function(){ localStorage.removeItem('error') }, 2000);
+  // } else if (localStorage.error){
+  //   errorMessage = <p>Login Failed. Check your credentials and resubmit.</p>
+  //   setInterval(function(){ localStorage.removeItem('error') }, 2000);
+  // } else {
+  //   errorMessage = <p></p>
+  // }
+
+  // console.log('rendering');
+
+  const { loginWithRedirect } = useAuth0();
 
   return(
     <section className="login-container">
-      {errorMessage}
+
+      {/* {errorMessage}
       {
         localStorage.loggedIn ? (
           <Redirect to="/dashboard" />
@@ -125,7 +135,8 @@ export const LoginForm = () => {
             </form>
         </article>
         )
-      }
+      } */}
+       <button onClick={() => loginWithRedirect()}>Login</button>
     </section>
     )};
 

@@ -7,132 +7,112 @@ import '../styles/pages/dashboard.css';
 import ReviewForm from './review-form';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
+import { findOrCreateUser } from '../auth/Auth0Provider';
 
-export const Dashboard = (props) => {
+export const Dashboard = () => {
 const [username, setUsername] = useState("");
-  const [userId, setUserId ] = useState("");
-  const [name, setName ] = useState("");
-  const [submitReview, setSubmitReview ] = useState(false);
-  const [plates, setPlates ] = useState([]);
-  // const [user, setUser] = useState(null);
+const [userId, setUserId ] = useState("");
+const [name, setName ] = useState("");
+const [submitReview, setSubmitReview ] = useState(false);
+const [plates, setPlates ] = useState([]);
+// const [user, setUser] = useState(null);
+const [userInfo, setUserInfo] = useState(null);
 
+const { isAuthenticated, isLoading, user, logout, getIdTokenClaims } = useAuth0();
 const navigate = useNavigate();
 
-  // const user = JSON.parse(localStorage.getItem('user'));
+const accessToken = localStorage.getItem('accessToken');
 
-  const { isAuthenticated, isLoading, user, logout } = useAuth0();
+  // const storeUser = async (userId, name, storePlates) => {
+  //   const res = await fetch(
+  //     `${API_BASE_URL}/users/?search=${localStorage.user}`
+  //   );
 
-  const logoutWithRedirect = () =>
-    logout({
-        logoutParams: {
-          returnTo: window.location.origin,
-        }
-      }
-    );
-
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //     const user = await auth0Client.getUser();
-  //     console.log('user', user)
-  //     return user;
-  //   };
-  //   const user = getUser();
-  //   console.log('useEffect', user)
-  // }, [])
-  // console.log('user', user)
-
-  
-  const storeUser = async (userId, name, storePlates) => {
-    // const res = await fetch(
-    //   `${API_BASE_URL}/users/?search=${localStorage.user}`
-    // );
-
-    // // Pull out the data from response
-    // const [ user ] = await res.json();
+  //   // Pull out the data from response
+  //   const [ user ] = await res.json();
     
-    // // Store user info on localStorage
-    // localStorage.setItem('userId', user.id)
-    // setUserId(user.id) 
-    // userId = user.id
+  //   // Store user info on localStorage
+  //   localStorage.setItem('userId', user.id)
+  //   setUserId(user.id) 
+  //   userId = user.id
     
-    // localStorage.setItem('name', user.name)
-    // setName(user.name)
-    // name = user.name
+  //   localStorage.setItem('name', user.name)
+  //   setName(user.name)
+  //   name = user.name
     
-    // // Fetch & store plates on local storage
-    // const getplates = await fetch(`${API_BASE_URL}/plates/all/${user.id}`)
-    // const plates = await getplates.json();
+  //   // Fetch & store plates on local storage
+  //   const getplates = await fetch(`${API_BASE_URL}/plates/all/${user.id}`)
+  //   const plates = await getplates.json();
    
-    // setStorePlates(plates)
-    // localStorage.setItem('hasPlates', plates)
-    // storePlates = plates
+  //   setStorePlates(plates)
+  //   localStorage.setItem('hasPlates', plates)
+  //   storePlates = plates
    
-    // return user;
-  }
+  //   return user;
+  // }
 
-  // useEffect(() => {
-  //   console.log('localStorage.user', localStorage.user)
-  //   if (!localStorage.user) return;
+  const getAccessToken = async () => {
+    try {
+      const idTokenClaims = await getIdTokenClaims();
+      const accessToken = idTokenClaims.__raw;
+      localStorage.setItem('accessToken', accessToken);
+      console.log('Access Token:', accessToken);
+    } catch (error) {
+      console.error('Failed to get access token:', error);
+    }
+  };
 
-  //   const fetchUser = async () => {
-  //     console.log('trigger fetchUser')
-  //     const res = await fetch(
-  //       `${API_BASE_URL}/users/?search=${localStorage.user}`
-  //     );
-  //     const [user] = await res.json();
-  //     localStorage.setItem('user', user)
-  //     console.log('user', user)
-  //     setUser(user);
-  //   }
+  const fetchUserInfo = async () => {
+    try {
+        const _user = await findOrCreateUser({
+          email: user.email,
+          username: user.nickname,
+          name: `${user?.given_name} ${user?.family_name}`,
+        });
 
-  //   fetchUser();
-  // }, [localStorage.user]);
+        setUserInfo(_user);
+        localStorage.setItem("user", JSON.stringify(_user));
+        localStorage.setItem('userId', _user.id);
+        localStorage.setItem('name', _user.name);
+      
+    } catch (error) {
+      console.error('Failed to fetch user information:', error);
+    }
+  };
 
+  useEffect(() => {
+    if (isLoading) return;
+    if (!isAuthenticated && !accessToken) navigate('/')
 
+    // Call the function to get the access token
+    getAccessToken();
+    fetchUserInfo();
+  }, [isLoading, isAuthenticated, accessToken, navigate]);
 
-  // useEffect(() => {
-  //   console.log('user', user)
-  //   if (!user?.id) return;
-  //   const fetchPlates = async () => {
-  //     const res = await fetch(`${API_BASE_URL}/plates/all/${user.id}`)
-  //     const plates = await res.json();
-
-  //     console.log('plates', plates)
+  useEffect(() => {
+    if (!userInfo) return;
+    const fetchPlates = async () => {
+      const res = await fetch(`${API_BASE_URL}/plates/all/${userInfo.id}`)
+      const userPlates = await res.json();
      
-  //     setPlates(plates)
-  //     localStorage.setItem('hasPlates', plates)
-  //   }
+      setPlates(userPlates)
+      localStorage.setItem('hasPlates', userPlates)
+    }
 
-  //   fetchPlates();
+    fetchPlates();
 
-  //   // localStorage.removeItem('unclaimedPlate')
-  //   // localStorage.removeItem('success')
-  // }, [user?.id]);
-
-  if (!isAuthenticated) {
-    navigate('/');
-  }
+    // localStorage.removeItem('unclaimedPlate')
+    // localStorage.removeItem('success')
+  }, [userInfo]);
 
   if (isLoading) return <p>loading</p>
 
-  // return (
-  //  <div>
-  //     <div>
-  //       <img src={user.picture} alt={user.name} />
-  //       <h2>{user.name}</h2>
-  //       <p>{user.email}</p>
-  //       <button onClick={() => logoutWithRedirect()}>Logout</button>
-  //     </div>
-  //  </div>
-  // );
- 
   return (
     <main className="dashboard">
       <section className="logout-div">
         <Link to="/" id='logout-link'>
             <button className="logout" onClick={() => {
               logout();
-              props.logout()
               localStorage.setItem("logout", true)
               }}>
               Logout
@@ -141,7 +121,7 @@ const navigate = useNavigate();
       </section>
       <DashboardNav />
       <section className="dashboard-greeting">
-        <p className="greeting-text">hey there, {user?.name}</p>
+        <p className="greeting-text">hey there, {user?.nickname}</p>
       </section>
       <button 
           className="add-review"

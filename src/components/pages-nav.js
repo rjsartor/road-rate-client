@@ -2,22 +2,39 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import icon from '../assets/thumbs-up.png';
 import '../styles/navbars/dashboard-nav.css';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export const PagesNav = () => {
   let claimPlate = "/claim-plate"
   let myPlates = "/my-plates";
   let myReviews = "/my-reviews"
 
-  if (!localStorage.loggedIn) {
-    claimPlate = myPlates = myReviews = "/register";
-  }
+  const { logout } = useAuth0;
+
+  // if (isLoading) return <p>loading</p>
+
+  // if (!accessToken) {
+  //   claimPlate = myPlates = myReviews = "/login";
+  // }
+
+  const accessToken = localStorage.getItem('accessToken');
 
   return(
     <main className="pages-nav">
+      <section className="logout-div">
+        <Link to="/" id='logout-link'>
+            <button className="logout" onClick={() => {
+              logout();
+              localStorage.setItem("logout", true)
+              }}>
+              Logout
+            </button>
+        </Link >
+      </section>
       <section className="logo-wrapper">
         <ul className="smaller-header-logo">
           <li className="header">
-            <Link to="/"><h1>RoadRate</h1></Link>
+            <Link to="/dashboard"><h1>RoadRate</h1></Link>
           </li>
           <li className="icon">
             <img src={icon} 
