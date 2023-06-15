@@ -1,10 +1,8 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import LandingNav from './landing-nav';
 import ReviewList from './review-list';
 import About from './about.js';
 import '../styles/pages/landing.css';
-import { useAuth0 } from "@auth0/auth0-react";
 
 export const LandingPage = () => {
 

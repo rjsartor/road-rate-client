@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { API_BASE_URL } from '../config';
 import { Link } from 'react-router-dom';
 import ReviewList from './review-list';
@@ -10,9 +10,9 @@ import { useNavigate } from 'react-router-dom';
 import { findOrCreateUser } from '../auth/Auth0Provider';
 
 export const Dashboard = () => {
-const [username, setUsername] = useState("");
-const [userId, setUserId ] = useState("");
-const [name, setName ] = useState("");
+// const [username, setUsername] = useState("");
+// const [userId, setUserId ] = useState("");
+// const [name, setName ] = useState("");
 const [submitReview, setSubmitReview ] = useState(false);
 const [plates, setPlates ] = useState([]);
 // const [user, setUser] = useState(null);
@@ -51,7 +51,7 @@ const accessToken = localStorage.getItem('accessToken');
   //   return user;
   // }
 
-  const getAccessToken = async () => {
+  const getAccessToken = useCallback(async () => {
     try {
       const idTokenClaims = await getIdTokenClaims();
       const accessToken = idTokenClaims.__raw;
@@ -60,9 +60,9 @@ const accessToken = localStorage.getItem('accessToken');
     } catch (error) {
       console.error('Failed to get access token:', error);
     }
-  };
+  }, []);
 
-  const fetchUserInfo = async () => {
+  const fetchUserInfo = useCallback(async () => {
     try {
         const _user = await findOrCreateUser({
           email: user.email,
@@ -78,7 +78,7 @@ const accessToken = localStorage.getItem('accessToken');
     } catch (error) {
       console.error('Failed to fetch user information:', error);
     }
-  };
+  }, [user]);
 
   useEffect(() => {
     if (isLoading) return;
@@ -87,7 +87,7 @@ const accessToken = localStorage.getItem('accessToken');
     // Call the function to get the access token
     getAccessToken();
     fetchUserInfo();
-  }, [isLoading, isAuthenticated, accessToken, navigate]);
+  }, [isLoading, isAuthenticated, accessToken, navigate, getAccessToken, fetchUserInfo]);
 
   useEffect(() => {
     if (!userInfo) return;

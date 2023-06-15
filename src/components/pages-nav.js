@@ -17,8 +17,6 @@ export const PagesNav = () => {
   //   claimPlate = myPlates = myReviews = "/login";
   // }
 
-  const accessToken = localStorage.getItem('accessToken');
-
   return(
     <main className="pages-nav">
       <section className="logout-div">

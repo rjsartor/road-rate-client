@@ -1,44 +1,43 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import LoginForm from './login-form';
 import '../styles/navbars/landing-nav.css';
 import '../styles/modal.css';
 import { useAuth0 } from "@auth0/auth0-react";
 
 export const LandingNav = () => {
 
-    const [modalOpen, setModalOpen] = useState(false);
-    const onClose = () => setModalOpen(false);
+    // const [modalOpen, setModalOpen] = useState(false);
+    // const onClose = () => setModalOpen(false);
 
-    const clickOutside = (ref, onClose) => {
-        const statusChange = (e) => {
-            if (!ref.current.contains(e.target)){
-                setModalOpen(modalOpen)
-                onClose();
-            }
-        }
-        document.addEventListener('click', statusChange)
-        return function cleanup() {
-            document.removeEventListener('click', statusChange)
-        }
-    }
+    // const clickOutside = (ref, onClose) => {
+    //     const statusChange = (e) => {
+    //         if (!ref.current.contains(e.target)){
+    //             setModalOpen(modalOpen)
+    //             onClose();
+    //         }
+    //     }
+    //     document.addEventListener('click', statusChange)
+    //     return function cleanup() {
+    //         document.removeEventListener('click', statusChange)
+    //     }
+    // }
 
-    const LoginModal = ({ title, onClose }) => {
-      const modalRef = useRef(null);
+    // const LoginModal = ({ title, onClose }) => {
+    //   const modalRef = useRef(null);
 
-      useEffect(() => clickOutside(modalRef, onClose))
+    //   useEffect(() => clickOutside(modalRef, onClose))
 
-        return (
-            <div className="overlay">
-              <div className="modal">
-                <h2>{title}</h2>
-                <div className="login-content" ref={modalRef}>
-                <LoginForm />
-                </div>
-              </div>
-            </div>
-          );
-      }     
+    //     return (
+    //         <div className="overlay">
+    //           <div className="modal">
+    //             <h2>{title}</h2>
+    //             <div className="login-content" ref={modalRef}>
+    //             <LoginForm />
+    //             </div>
+    //           </div>
+    //         </div>
+    //       );
+    //   }     
       
     const { loginWithRedirect } = useAuth0();
 
@@ -46,7 +45,7 @@ export const LandingNav = () => {
     <div className="navbar">
         <ul className="nav-list">
             <li className="nav-item">
-                <Link to="/register" className="register-link">Register</Link>
+                {/* <Link to="/register" className="register-link">Register</Link> */}
             </li>
             <li className="nav-item">
                 <button onClick={() => loginWithRedirect()}>Login</button>

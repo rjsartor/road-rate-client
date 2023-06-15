@@ -1,24 +1,23 @@
-import React, { useState } from 'react'; 
-import { API_BASE_URL } from '../config';
+import React from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 
 export const LoginForm = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  // eslint-disable-next-line no-unused-vars
-  const [authToken, setAuthToken] = useState("")
-  const [loggedIn, setLoggedIn] = useState(true)
-  const [authError, setAuthError] = useState(false)
-  const [modalOpen, setModalOpen] = useState(true);
+  // const [username, setUsername] = useState("");
+  // const [password, setPassword] = useState("");
+  // // eslint-disable-next-line no-unused-vars
+  // const [authToken, setAuthToken] = useState("")
+  // const [loggedIn, setLoggedIn] = useState(true)
+  // const [authError, setAuthError] = useState(false)
+  // const [modalOpen, setModalOpen] = useState(true);
   
-  const Button = () => {
+  // const Button = () => {
 
-    localStorage.setItem("modalOpen", modalOpen)
+  //   localStorage.setItem("modalOpen", modalOpen)
 
-    return (
-      <button className="close-login" onClick={() => setModalOpen(false)}>X</button>
-    )
-  }
+  //   return (
+  //     <button className="close-login" onClick={() => setModalOpen(false)}>X</button>
+  //   )
+  // }
  
 // const handleSubmit = e => {
 //     e.preventDefault(e); 

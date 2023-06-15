@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import icon from '../assets/thumbs-up.png';
 import '../styles/navbars/dashboard-nav.css';
