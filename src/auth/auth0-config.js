@@ -1,8 +1,13 @@
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
+
 const authConfig = {
-    domain: 'dev-plmqd3rcezf6z2qx.us.auth0.com',
-    clientId: 'taV2LOshkNMSx6mgEMrjPGFWTR538rAi',
-    redirectUri: 'http://localhost:3000/dashboard',
-    // audience: 'https://api.local.roadrate.com',
-  };
+  domain: process.env.REACT_APP_AUTH0_DOMAIN,
+  clientId: process.env.REACT_APP_AUTH0_CLIENT_ID,
+  redirectUri: process.env.REACT_APP_AUTH0_REDIRECT_URI
+  // audience: 'https://api.local.roadrate.com',
+};
   
-  export default authConfig;
+export default authConfig;

@@ -1,6 +1,5 @@
-import React, {useState } from 'react';
-import { BrowserRouter, Route, Router, RouterProvider, Routes, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
-import RegistrationPage from './registration-page';
+import React from 'react';
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import LandingPage from './landing-page';
 import Dashboard from './dashboard';
 import LoginForm from './login-form';
@@ -9,7 +8,7 @@ import PublicPlate from './public-plate';
 import MyPlatesList from './my-plates-list';
 import MyPlate from './my-plate';
 import About from './about';
-import MyReviews from './my-reviews'
+import MyReviews from './my-reviews';
 import '../styles/App.css';
 
 import { Auth0Provider } from "../auth/Auth0Provider";
