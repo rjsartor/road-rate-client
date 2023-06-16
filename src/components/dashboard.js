@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { API_BASE_URL } from '../config';
-import { Link } from 'react-router-dom';
 import ReviewList from './review-list';
-import DashboardNav from './dashboard-nav';
 import '../styles/pages/dashboard.css';
 import ReviewForm from './review-form';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
 import { findOrCreateUser } from '../auth/Auth0Provider';
+import PagesNav from './pages-nav';
 
 export const Dashboard = () => {
 // const [username, setUsername] = useState("");
@@ -27,7 +26,6 @@ const accessToken = localStorage.getItem('accessToken');
       const idTokenClaims = await getIdTokenClaims();
       const accessToken = idTokenClaims.__raw;
       localStorage.setItem('accessToken', accessToken);
-      console.log('Access Token:', accessToken);
     } catch (error) {
       console.error('Failed to get access token:', error);
     }
@@ -78,17 +76,7 @@ const accessToken = localStorage.getItem('accessToken');
 
   return (
     <main className="dashboard">
-      <section className="logout-div">
-        <Link to="/" id='logout-link'>
-            <button className="logout" onClick={() => {
-              logout();
-              localStorage.setItem("logout", true)
-              }}>
-              Logout
-            </button>
-        </Link >
-      </section>
-      <DashboardNav />
+      <PagesNav />
       <section className="dashboard-greeting">
         <p className="greeting-text">hey there, {user?.nickname}</p>
       </section>

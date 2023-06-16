@@ -45,6 +45,9 @@ h1 {
     list-style: none;
   }
 
+  .header-logo:hover {
+    cursor: pointer;
+  }
 
   /* for non dashboard pages */
   .smaller-header-logo {

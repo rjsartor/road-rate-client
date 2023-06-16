@@ -2,14 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import icon from '../assets/thumbs-up.png';
 import '../styles/navbars/dashboard-nav.css';
+import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
 export const PagesNav = () => {
+  const navigate = useNavigate();
+  const { logout } = useAuth0();
+  const accessToken = localStorage.getItem('accessToken');
+
   let claimPlate = "/claim-plate"
   let myPlates = "/my-plates";
   let myReviews = "/my-reviews"
-
-  const { logout } = useAuth0;
 
   // if (isLoading) return <p>loading</p>
 
@@ -19,25 +22,26 @@ export const PagesNav = () => {
 
   return(
     <main className="pages-nav">
-      <section className="logout-div">
-        <Link to="/" id='logout-link'>
-            <button className="logout" onClick={() => {
-              logout();
-              localStorage.setItem("logout", true)
-              }}>
-              Logout
-            </button>
-        </Link >
-      </section>
+      <div className="logout-div">
+        <button className="logout" onClick={() => {
+          localStorage.setItem("logout", true)
+          logout();
+        }}>
+          Log out
+        </button>
+      </div>
       <section className="logo-wrapper">
-        <ul className="smaller-header-logo">
-          <li className="header">
-            <Link to="/dashboard"><h1>RoadRate</h1></Link>
+        <ul className="header-logo">
+          <li onClick={() => {
+            navigate(accessToken ? '/dashboard' : '/')}
+          }
+            className="header">
+            <h1>RoadRate</h1>
           </li>
-          <li className="icon">
-            <img src={icon} 
-            alt="RoadRate icon" 
-            className="icon"
+          <li className="icon"><img 
+          src={icon} 
+          alt="RoadRate icon" 
+          className="icon"
           />
           </li>
         </ul>

@@ -47,7 +47,7 @@ export const LandingNav = () => {
                 {/* <Link to="/register" className="register-link">Register</Link> */}
             </li>
             <li className="nav-item">
-                <button onClick={() => loginWithRedirect()}>Login</button>
+                <button className="add-review" onClick={() => loginWithRedirect()}>Login</button>
             </li>
         </ul>
     </div>
