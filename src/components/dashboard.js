@@ -20,36 +20,7 @@ const [userInfo, setUserInfo] = useState(null);
 
 const { isAuthenticated, isLoading, user, logout, getIdTokenClaims } = useAuth0();
 const navigate = useNavigate();
-
 const accessToken = localStorage.getItem('accessToken');
-
-  // const storeUser = async (userId, name, storePlates) => {
-  //   const res = await fetch(
-  //     `${API_BASE_URL}/users/?search=${localStorage.user}`
-  //   );
-
-  //   // Pull out the data from response
-  //   const [ user ] = await res.json();
-    
-  //   // Store user info on localStorage
-  //   localStorage.setItem('userId', user.id)
-  //   setUserId(user.id) 
-  //   userId = user.id
-    
-  //   localStorage.setItem('name', user.name)
-  //   setName(user.name)
-  //   name = user.name
-    
-  //   // Fetch & store plates on local storage
-  //   const getplates = await fetch(`${API_BASE_URL}/plates/all/${user.id}`)
-  //   const plates = await getplates.json();
-   
-  //   setStorePlates(plates)
-  //   localStorage.setItem('hasPlates', plates)
-  //   storePlates = plates
-   
-  //   return user;
-  // }
 
   const getAccessToken = useCallback(async () => {
     try {
@@ -72,9 +43,7 @@ const accessToken = localStorage.getItem('accessToken');
 
         setUserInfo(_user);
         localStorage.setItem("user", JSON.stringify(_user));
-        localStorage.setItem('userId', _user.id);
-        localStorage.setItem('name', _user.name);
-      
+        localStorage.setItem("userId", _user.id);
     } catch (error) {
       console.error('Failed to fetch user information:', error);
     }

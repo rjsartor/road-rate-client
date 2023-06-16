@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../styles/navbars/landing-nav.css';
 import '../styles/modal.css';
 import { useAuth0 } from "@auth0/auth0-react";

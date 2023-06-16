@@ -30,7 +30,7 @@ export const MyReviews = () => {
   let ownerComment;
   let filteredReviews;
 
-  if (reviews) {
+  if (reviews.length) {
     filteredReviews = reviews.filter(review => review.plateNumber.includes(searchInput.toUpperCase()));
     review = filteredReviews.map((review, index) => { 
     const thisDate = new Date();

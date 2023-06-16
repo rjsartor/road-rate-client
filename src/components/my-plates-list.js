@@ -41,7 +41,7 @@ export const MyPlatesList = () => {
   }
 
   const noPlatesMessage = () => {
-    if(localStorage.hasPlates === '' || !plates) {
+    if(localStorage.hasPlates === '' || !plates.length) {
       return (
         <p>No plates associated</p>
       )
@@ -51,7 +51,7 @@ export const MyPlatesList = () => {
     )
   }
 
-   if (plates) {
+   if (plates.length) {
     plate = plates.map((plate, index) => { 
       return (
         <li className='plate-list-item' key={index} tabIndex='0'>
