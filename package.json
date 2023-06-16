@@ -37,7 +37,7 @@
     "url": "^0.11.1"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "node --max_old_space_size=2560 node_modules/.bin/react-scripts start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
