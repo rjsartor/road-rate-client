@@ -72,7 +72,7 @@ const accessToken = localStorage.getItem('accessToken');
     // localStorage.removeItem('success')
   }, [userInfo]);
 
-  if (isLoading) return <p>loading</p>
+  if (isLoading) return <p>Authenticating...</p>
 
   return (
     <main className="dashboard">
