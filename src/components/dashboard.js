@@ -17,7 +17,7 @@ const [plates, setPlates ] = useState([]);
 // const [user, setUser] = useState(null);
 const [userInfo, setUserInfo] = useState(null);
 
-const { isAuthenticated, isLoading, user, logout, getIdTokenClaims } = useAuth0();
+const { isAuthenticated, isLoading, user, getIdTokenClaims } = useAuth0();
 const navigate = useNavigate();
 const accessToken = localStorage.getItem('accessToken');
 
@@ -29,7 +29,8 @@ const accessToken = localStorage.getItem('accessToken');
     } catch (error) {
       console.error('Failed to get access token:', error);
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); 
 
   const fetchUserInfo = useCallback(async () => {
     try {
