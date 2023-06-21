@@ -14,10 +14,9 @@ export const PublicPlate = () => {
   const fetchPlate = async () => {
     /* ==== extract plateId from url ==== */
     const address = document.location.href;
-    // const plateId = address.substring((address.indexOf('m')+ 11), address.length);
-    //when running locally use next line
-    console.log('address', address)
-    const plateId = address.substring((address.indexOf('d')+ 2), address.length);
+    const url = new URL(address);
+    const plateId = url.pathname.split('/').pop();
+    // const plateId = address.substring((address.indexOf('d')+ 2), address.length);
     setPlateId(plateId)
     
     /* ==== fetch plate info using plateId ==== */
