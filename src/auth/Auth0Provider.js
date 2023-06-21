@@ -20,7 +20,6 @@ const validateEmail = async (email) => {
 
 export const findOrCreateUser = async (options) => {
   if (!validateEmail(options.email)) {
-    console.log('email non validated')
     return false;
   }
 
