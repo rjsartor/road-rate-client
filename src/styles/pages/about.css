@@ -12,7 +12,7 @@
     font-weight: bolder;
     padding: 5px 10px;
   }
-
+  
 .overlay {
   position: fixed;
   left: 0;
@@ -31,10 +31,8 @@
   border-radius: 3px;
   background-color: rgb(255, 255, 255);
   z-index: 2;
-  height: 450px;
-  max-height: 100%;
-  width: 625px;
-  max-width: 92%;
+  height: 75%;
+  width: 75%;
   overflow: auto;
 }
 
@@ -86,9 +84,14 @@
   padding-left: 15px;
 }
 
-.register-link h4 {
+.register-link {
+  margin: 0;
+  color: #414141;
+  padding-left: 15px;
   color: rgb(52, 110, 98);
   padding-bottom: 15px;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .about-icon {
