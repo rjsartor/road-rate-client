@@ -15,10 +15,10 @@ const Spacer = ({
         minWidth: _width,
         height: _height,
         minHeight: _height,
-        ...rest,
+        ...rest
       }}
       {...rest}
     />
   );
 };
-export default Spacer; 
+export default Spacer;

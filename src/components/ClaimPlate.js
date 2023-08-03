@@ -18,8 +18,8 @@ const ClaimPlate = () => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${localStorage.authToken}`
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.authToken}`
         }
       });
       const [data] = await response.json();
@@ -41,14 +41,14 @@ const ClaimPlate = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${localStorage.authToken}`
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.authToken}`
         },
         body: JSON.stringify({
           plateNumber: plateNumber.toUpperCase(),
           plateState,
           userId,
-          isOwned: true,
+          isOwned: true
         })
       });
       const data = await response.json();
@@ -70,8 +70,8 @@ const ClaimPlate = () => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${localStorage.authToken}`
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.authToken}`
         },
         body: JSON.stringify({
           userId,
@@ -116,7 +116,7 @@ const ClaimPlate = () => {
           </>
         );
       } else {
-        plateAction = <td>{claimButton(handleClaimClick, 'Claim Plate')}</td>
+        plateAction = <td>{claimButton(handleClaimClick, 'Claim Plate')}</td>;
       }
     } else if (plate === undefined) {
       plateAction = (
@@ -125,7 +125,7 @@ const ClaimPlate = () => {
         </td>
       );
     }
-  
+
     return (
       <table>
         <tbody>
@@ -142,12 +142,12 @@ const ClaimPlate = () => {
               <td>{plate === undefined ? plateState : plate.plateState}</td>
               {plateAction}
             </tr>
-          )}  
+          )}
         </tbody>
       </table>
     );
   };
-  
+
   return (
     <main className="claim-plate">
       <PagesNav />
@@ -192,8 +192,6 @@ const ClaimPlate = () => {
       <p>{successMessage}</p>
     </main>
   );
-  
-}
+};
 
 export default ClaimPlate;
-

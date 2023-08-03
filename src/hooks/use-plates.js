@@ -1,27 +1,26 @@
-import { useEffect, useState } from "react";
-import { API_BASE_URL } from "../config";
+import { useEffect, useState } from 'react';
+import { API_BASE_URL } from '../config';
 
 export const usePlates = (userId) => {
-    const [plates, setPlates] = useState([]);
+  const [plates, setPlates] = useState([]);
 
-    useEffect(() => {
-        if (!userId) return;
+  useEffect(() => {
+    if (!userId) return;
 
-        console.log('userId', userId)
+    console.log('userId', userId);
 
-        const fetchPlates = async () => {
-          const res = await fetch(`${API_BASE_URL}/plates/all/${userId}`)
-          const plates = await res.json();
+    const fetchPlates = async () => {
+      const res = await fetch(`${API_BASE_URL}/plates/all/${userId}`);
+      const plates = await res.json();
 
-          if (plates) {
-            setPlates(plates);
-            localStorage.setItem('hasPlates', plates)   
-          }
-        }
-    
-        fetchPlates();
-      }, [userId]);
+      if (plates) {
+        setPlates(plates);
+        localStorage.setItem('hasPlates', plates);
+      }
+    };
 
+    fetchPlates();
+  }, [userId]);
 
-    return { plates };
-}
+  return { plates };
+};

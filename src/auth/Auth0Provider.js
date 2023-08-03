@@ -1,9 +1,8 @@
-import React from "react";
+import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { Auth0Provider as Provider} from "@auth0/auth0-react";
+import { Auth0Provider as Provider } from '@auth0/auth0-react';
 import authConfig from './auth0-config';
-import { API_BASE_URL } from "../config";
-
+import { API_BASE_URL } from '../config';
 
 // move to utils
 const validateEmail = async (email) => {
@@ -13,10 +12,10 @@ const validateEmail = async (email) => {
 
   // Pull out the data from response
   const emails = await res.json();
- 
+
   // if the username exists in the DB
   return !emails.length;
-}
+};
 
 export const findOrCreateUser = async (options) => {
   if (!validateEmail(options.email)) {
@@ -27,20 +26,20 @@ export const findOrCreateUser = async (options) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      Accept: 'application/json'
     },
     body: JSON.stringify(options)
   })
-  .then(res => {
-    return res.json();
-  }).then(user => {
-    return user;
-  })
-  .catch(err => {
-    if(err === 'TypeError: Failed to fetch'){
-      return Promise.reject(err)
-    }
-  })
+    .then(res => {
+      return res.json();
+    }).then(user => {
+      return user;
+    })
+    .catch(err => {
+      if (err === 'TypeError: Failed to fetch') {
+        return Promise.reject(err);
+      }
+    });
 };
 
 export const Auth0Provider = () => {
@@ -53,7 +52,7 @@ export const Auth0Provider = () => {
     ...authConfig,
     onRedirectCallback,
     cacheLocation: 'localstorage',
-    useRefreshTokens: true,
+    useRefreshTokens: true
   };
 
   return (

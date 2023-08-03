@@ -1,9 +1,9 @@
 export const StateSelect = ({ state, setState }) => {
-    return (
-        <select 
+  return (
+        <select
             className='browser-default'
-            name='plate-state' 
-            value={state} 
+            name='plate-state'
+            value={state}
             onChange={(e) => setState(e.target.value)}
             aria-label='plate-state'
         >
@@ -59,6 +59,6 @@ export const StateSelect = ({ state, setState }) => {
             <option value="WV">West Virginia</option>
             <option value="WI">Wisconsin</option>
             <option value="WY">Wyoming</option>
-        </select>   
-    );
-}
+        </select>
+  );
+};

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from '@auth0/auth0-react';
 
 export const LoginForm = () => {
   // const [username, setUsername] = useState("");
@@ -9,7 +9,7 @@ export const LoginForm = () => {
   // const [loggedIn, setLoggedIn] = useState(true)
   // const [authError, setAuthError] = useState(false)
   // const [modalOpen, setModalOpen] = useState(true);
-  
+
   // const Button = () => {
 
   //   localStorage.setItem("modalOpen", modalOpen)
@@ -18,61 +18,61 @@ export const LoginForm = () => {
   //     <button className="close-login" onClick={() => setModalOpen(false)}>X</button>
   //   )
   // }
- 
-// const handleSubmit = e => {
-//     e.preventDefault(e); 
 
-//     setUsername(username)
-//     setLoggedIn(loggedIn)
-//     localStorage.removeItem("logout")
+  // const handleSubmit = e => {
+  //     e.preventDefault(e);
 
-//     const headers = {
-//       'Content-Type': 'application/json',
-//       'Accept': 'application/json'
-//     }
+  //     setUsername(username)
+  //     setLoggedIn(loggedIn)
+  //     localStorage.removeItem("logout")
 
-//       return fetch(`${API_BASE_URL}/auth/login`, {
-//         method: 'POST',
-//         headers,
-//         body: JSON.stringify({
-//           username,
-//           password
-//         })
-//       })
-//       .then(res => {
-//         console.log('res', res)
-//         return res.json();
-//       })
-//       .then( ( auth ) => {  
-//         console.log('auth', auth)
-//         const { message, code, name } = auth;
-//         if(code === 401 || message === 'Unauthorized' || name === 'AuthenticationError') {
-//           setAuthError(true)
-//           localStorage.setItem("error", name)
-//         }
+  //     const headers = {
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json'
+  //     }
 
-//         if (auth.hasOwnProperty("authToken")){
-//           console.log('user', auth.user)
-//           localStorage.setItem("user", JSON.stringify(auth.user));
-//           localStorage.setItem("loggedIn", loggedIn);
-//           localStorage.setItem("authToken", auth.authToken);
-//           localStorage.removeItem("error")
-//           setAuthToken(auth)
-//         }
-//         return auth;
-//       })
-//       .catch(err => {
-//         const { code } = err;
-//         const message = code === 401 ? 'Incorrect username or password' : 'Unable to login, please try again';
-//         console.log('err', err)
-        
-//         return Promise.reject(
-//           new Error({
-//             _error: message
-//           })
-//         )
-//       })
-//   };
+  //       return fetch(`${API_BASE_URL}/auth/login`, {
+  //         method: 'POST',
+  //         headers,
+  //         body: JSON.stringify({
+  //           username,
+  //           password
+  //         })
+  //       })
+  //       .then(res => {
+  //         console.log('res', res)
+  //         return res.json();
+  //       })
+  //       .then( ( auth ) => {
+  //         console.log('auth', auth)
+  //         const { message, code, name } = auth;
+  //         if(code === 401 || message === 'Unauthorized' || name === 'AuthenticationError') {
+  //           setAuthError(true)
+  //           localStorage.setItem("error", name)
+  //         }
+
+  //         if (auth.hasOwnProperty("authToken")){
+  //           console.log('user', auth.user)
+  //           localStorage.setItem("user", JSON.stringify(auth.user));
+  //           localStorage.setItem("loggedIn", loggedIn);
+  //           localStorage.setItem("authToken", auth.authToken);
+  //           localStorage.removeItem("error")
+  //           setAuthToken(auth)
+  //         }
+  //         return auth;
+  //       })
+  //       .catch(err => {
+  //         const { code } = err;
+  //         const message = code === 401 ? 'Incorrect username or password' : 'Unable to login, please try again';
+  //         console.log('err', err)
+
+  //         return Promise.reject(
+  //           new Error({
+  //             _error: message
+  //           })
+  //         )
+  //       })
+  //   };
 
   // /* ==== RENDER VALIDATION ERROR MESSAGE ==== */
   // let errorMessage;
@@ -90,7 +90,7 @@ export const LoginForm = () => {
 
   const { loginWithRedirect } = useAuth0();
 
-  return(
+  return (
     <section className="login-container">
 
       {/* {errorMessage}
@@ -120,7 +120,7 @@ export const LoginForm = () => {
                 placeholder="enter password"
                 type="password"
                 name="password"
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" 
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
                 title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                 required
                 id="login-password"
@@ -136,6 +136,7 @@ export const LoginForm = () => {
       } */}
        <button onClick={() => loginWithRedirect()}>Login</button>
     </section>
-    )};
+  );
+};
 
 export default LoginForm;

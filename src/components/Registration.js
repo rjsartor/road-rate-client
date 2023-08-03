@@ -3,12 +3,12 @@ import RegistrationForm from './registration-form';
 import icon from '../assets/thumbs-up.png';
 import '../styles/forms/registration-form.css';
 
-export function RegistrationPage() {
-    return (
+export function RegistrationPage () {
+  return (
         <div className="registration-page">
-            <img 
-                src={icon} 
-                alt="icon" 
+            <img
+                src={icon}
+                alt="icon"
                 className="registration-icon"
             />
             <h1>Register for RoadRate</h1>
@@ -17,7 +17,7 @@ export function RegistrationPage() {
             </div>
             <RegistrationForm />
         </div>
-    );
+  );
 }
 
 export default RegistrationPage;

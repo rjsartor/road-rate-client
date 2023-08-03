@@ -12,9 +12,9 @@ export const Dashboard = () => {
   const { plates } = usePlates(userInfo?.id);
   const { reviews } = useReviews('reviews');
 
-  const [submitReview, setSubmitReview ] = useState(false);
+  const [submitReview, setSubmitReview] = useState(false);
 
-  if (isLoading) return <p>Authenticating...</p>
+  if (isLoading) return <p>Authenticating...</p>;
 
   return (
     <main className="dashboard">
@@ -22,7 +22,7 @@ export const Dashboard = () => {
       <section className="dashboard-greeting">
         <p className="greeting-text">hey there, {userInfo?.username}</p>
       </section>
-      <button 
+      <button
         className="add-review"
         onClick={() => setSubmitReview(prev => !prev)}
       >
@@ -30,8 +30,8 @@ export const Dashboard = () => {
       </button>
       {submitReview && <ReviewForm plates={plates} />}
       <ReviewList reviews={reviews} canClickPlate={true} />
-    </main> 
-  )
-}
+    </main>
+  );
+};
 
 export default Dashboard;

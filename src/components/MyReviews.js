@@ -1,13 +1,13 @@
-import React, { useState }  from 'react'; 
+import React, { useState } from 'react';
 import PagesNav from './PagesNav';
 import { useReviews } from '../hooks/use-reviews';
 import ReviewList from './common/ReviewList';
 import '../styles/reviews/my-reviews.css';
 
 export const MyReviews = () => {
-  const [ searchInput, setSearchInput ] = useState("");
+  const [searchInput, setSearchInput] = useState('');
   const { reviews } = useReviews(`reviews/${localStorage.userId}`);
-  
+
   return (
     <section className="my-reviews">
       <PagesNav />
@@ -16,12 +16,12 @@ export const MyReviews = () => {
         <article className="search-section">
           <fieldset id="review-search">
             <legend>Search By License Plate</legend>
-            <form 
+            <form
               id="search-form"
               className="search-form"
             >
               <article className="input-wrapper">
-                <label 
+                <label
                   htmlFor="search"
                   className="search-label"
                   aria-label="search-form"

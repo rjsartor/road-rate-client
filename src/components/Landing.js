@@ -5,7 +5,7 @@ import About from './About.js';
 import '../styles/pages/landing.css';
 
 export const LandingPage = () => {
-    return (
+  return (
       <main className="home">
         <section className="landing-top">
           <LandingNav />
@@ -17,13 +17,13 @@ export const LandingPage = () => {
               <p id='anonymous'>100% anonymous.</p>
               <article className="about">
                 <About />
-              </article>  
-            </article>   
+              </article>
+            </article>
           </article>
         </section>
         <ReviewList />
       </main>
-    );
-}
+  );
+};
 
 export default LandingPage;

@@ -10,9 +10,9 @@ const PagesNav = () => {
   const accessToken = localStorage.getItem('accessToken');
 
   // todo: routes consts
-  const claimPlate = "/claim-plate";
-  const myPlates = "/my-plates";
-  const myReviews = "/my-reviews";
+  const claimPlate = '/claim-plate';
+  const myPlates = '/my-plates';
+  const myReviews = '/my-reviews';
 
   const handleLogoClick = () => {
     navigate(accessToken ? '/dashboard' : '/');
@@ -21,15 +21,17 @@ const PagesNav = () => {
   return (
     <main className="pages-nav">
       <div className="logout-div">
-        {accessToken ? (
+        {accessToken
+          ? (
           <button className="logout" onClick={handleLogout}>
             Log out
           </button>
-        ) : (
+            )
+          : (
           <button className="add-review" onClick={loginWithRedirect}>
             Login
           </button>
-        )}
+            )}
       </div>
       <section className="logo-wrapper">
         <ul className="header-logo">

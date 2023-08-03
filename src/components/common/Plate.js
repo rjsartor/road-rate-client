@@ -1,11 +1,13 @@
 const Plate = ({ plate }) => {
-    if (!plate) return <p>Loading plate...</p>
+  if (!plate) return <p>Loading plate...</p>;
 
-    const karmaStyling = plate.karma > 0
-        ? 'public-plate-wrapper-positive' : plate.karma < 0
-        ? 'public-plate-wrapper-negative' : 'public-plate-wrapper-neutral';
+  const karmaStyling = plate.karma > 0
+    ? 'public-plate-wrapper-positive'
+    : plate.karma < 0
+      ? 'public-plate-wrapper-negative'
+      : 'public-plate-wrapper-neutral';
 
-    return (
+  return (
         <article className={karmaStyling}>
             <article className='plate-content'>
             <article className='plate-title'>
@@ -17,7 +19,7 @@ const Plate = ({ plate }) => {
             </article>
             </article>
         </article>
-    )
-}
+  );
+};
 
 export default Plate;

@@ -1,40 +1,40 @@
-import { useState } from "react";
-import { API_BASE_URL } from "../config";
+import { useState } from 'react';
+import { API_BASE_URL } from '../config';
 
 const UnclaimPlate = () => {
-    const [unclaimMessage, setUnclaimMessage] = useState('');
-    const [unclaimWarning, setUnclaimWarning] = useState(false);
-    
-    const unClaimPlateClick = async (e) => {
-        e.preventDefault();
-        const userId = localStorage.userId;
-        localStorage.setItem('unclaimedPlate', localStorage.myPlate);
+  const [unclaimMessage, setUnclaimMessage] = useState('');
+  const [unclaimWarning, setUnclaimWarning] = useState(false);
 
-        try {
-        const response = await fetch(`${API_BASE_URL}/plates/unclaim/${localStorage.userId}`, {
-            method: 'PUT',
-            headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': `Bearer ${localStorage.authToken}`
-            },
-            body: JSON.stringify({
-            userId,
-            plateNumber: localStorage.myPlate,
-            plateState: localStorage.myState
-            })
-        });
+  const unClaimPlateClick = async (e) => {
+    e.preventDefault();
+    const userId = localStorage.userId;
+    localStorage.setItem('unclaimedPlate', localStorage.myPlate);
 
-        if (response.ok) {
-            localStorage.setItem('success', 'unclaimed');
-            setUnclaimMessage('You successfully unclaimed this plate.');
-        } else {
-            console.log('Unclaiming failed:', response.statusText);
-        }
-        } catch (error) {
-        console.error('Unclaiming error:', error);
-        }
-    };
+    try {
+      const response = await fetch(`${API_BASE_URL}/plates/unclaim/${localStorage.userId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.authToken}`
+        },
+        body: JSON.stringify({
+          userId,
+          plateNumber: localStorage.myPlate,
+          plateState: localStorage.myState
+        })
+      });
+
+      if (response.ok) {
+        localStorage.setItem('success', 'unclaimed');
+        setUnclaimMessage('You successfully unclaimed this plate.');
+      } else {
+        console.log('Unclaiming failed:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Unclaiming error:', error);
+    }
+  };
 
   const unClaimButton = (
     <button id="unregister-plate-btn" onClick={() => setUnclaimWarning(!unclaimWarning)}>
@@ -42,7 +42,8 @@ const UnclaimPlate = () => {
     </button>
   );
 
-  const confirmButton = unclaimWarning ? (
+  const confirmButton = unclaimWarning
+    ? (
     <button
       className='confirm-buttons'
       id="unclaim-plate-btn-confirm"
@@ -51,9 +52,11 @@ const UnclaimPlate = () => {
     >
       Yes
     </button>
-  ) : null;
+      )
+    : null;
 
-  const noButton = unclaimWarning ? (
+  const noButton = unclaimWarning
+    ? (
     <button
       className='confirm-buttons'
       id="unclaim-plate-btn-no"
@@ -61,7 +64,8 @@ const UnclaimPlate = () => {
     >
       No
     </button>
-  ) : null;
+      )
+    : null;
 
   const areYouSureMessage = unclaimWarning ? <p>Are you sure?</p> : null;
 
@@ -73,14 +77,13 @@ const UnclaimPlate = () => {
         <article className="unclaim-options">
         {areYouSureMessage}
         <article className="buttons-div">
-            {confirmButton} 
-            {noButton}                   
+            {confirmButton}
+            {noButton}
         </article>
         {unclaimMessageRender}
         </article>
     </section>
-  )
-
-}
+  );
+};
 
 export default UnclaimPlate;

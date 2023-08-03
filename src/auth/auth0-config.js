@@ -9,5 +9,5 @@ const authConfig = {
   redirectUri: process.env.REACT_APP_AUTH0_REDIRECT_URI
   // audience: 'https://api.local.roadrate.com',
 };
-  
+
 export default authConfig;
