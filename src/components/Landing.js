@@ -1,6 +1,6 @@
 import React from 'react';
 import LandingNav from './LandingNav';
-import About from './About.js';
+import About from './AboutPage.js';
 import '../styles/pages/landing.css';
 import { SearchByPlate } from './common/SearchByPlate';
 import ReviewList from './common/ReviewList';

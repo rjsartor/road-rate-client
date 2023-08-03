@@ -7,7 +7,7 @@ import ClaimPlate from './ClaimPlate';
 import PublicPlate from './PublicPlate';
 import MyPlatesList from './MyPlates';
 import MyPlate from './MyPlate';
-import About from './About';
+import About from './AboutPage';
 import MyReviews from './MyReviews';
 import '../styles/App.css';
 
