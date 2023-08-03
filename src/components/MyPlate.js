@@ -3,7 +3,6 @@ import PagesNav from './PagesNav';
 import UnclaimPlate from './UnclaimPlate';
 import Plate from './common/Plate';
 import { usePlate } from '../hooks/use-plate';
-import { Review } from './common/Review';
 import '../styles/plates/single-plate.css';
 import ReviewList from './common/ReviewList';
 

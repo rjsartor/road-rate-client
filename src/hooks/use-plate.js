@@ -12,7 +12,6 @@ export const usePlate = () => {
     const fetchData = async () => {
       try {
         const plateResponse = await fetch(`${API_BASE_URL}/plates/${id}`);
-        console.log('plateData', plateResponse);
         const plateData = await plateResponse.json();
         setPlate(plateData);
 

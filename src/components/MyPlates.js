@@ -7,11 +7,7 @@ import { usePlates } from '../hooks/use-plates';
 export const MyPlatesList = () => {
   const navigate = useNavigate();
 
-  console.log(localStorage);
-
   const { plates } = usePlates(localStorage.userId);
-
-  console.log(plates);
 
   const myPlateClick = (plate) => {
     const plateEndpoint = `/my-plates/id/${plate.id}`;

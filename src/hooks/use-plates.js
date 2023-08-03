@@ -7,8 +7,6 @@ export const usePlates = (userId) => {
   useEffect(() => {
     if (!userId) return;
 
-    console.log('userId', userId);
-
     const fetchPlates = async () => {
       const res = await fetch(`${API_BASE_URL}/plates/all/${userId}`);
       const plates = await res.json();

@@ -5,7 +5,7 @@
         "node": true
     },
     "extends": [
-        "standard",
+        // "standard",
         "plugin:react/recommended"
     ],
     "parserOptions": {
@@ -16,6 +16,7 @@
         "react"
     ],
     "rules": {
-        "semi": ["warn", "always"]
+        "semi": ["warn", "always"],
+        "react/prop-types": 0
     }
 }

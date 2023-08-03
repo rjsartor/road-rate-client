@@ -3,10 +3,10 @@ import { API_BASE_URL } from '../config';
 
 export const useReviews = (reviewsUrl) => {
   const [reviews, setReviews] = useState([]);
+  const [plateFilter, setPlateFilter] = useState('');
 
   const fetchReviews = async (reviewsUrl) => {
     const url = `${API_BASE_URL}/${reviewsUrl}`;
-    console.log('url', url);
     const response = await fetch(url);
     const reviews = await response.json();
     setReviews(reviews);
@@ -17,5 +17,12 @@ export const useReviews = (reviewsUrl) => {
     fetchReviews(reviewsUrl);
   }, [reviewsUrl]);
 
-  return { reviews, setReviews };
+  const filteredReviews = reviews.filter(r => r.plateNumber.includes(plateFilter));
+
+  return { 
+    reviews: filteredReviews, 
+    setReviews, 
+    plateFilter,
+    setPlateFilter
+  };
 };

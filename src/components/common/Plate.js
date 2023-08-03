@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Plate = ({ plate }) => {
   if (!plate) return <p>Loading plate...</p>;
 

@@ -1,10 +1,14 @@
 import React from 'react';
 import LandingNav from './LandingNav';
-import ReviewList from './ReviewList';
 import About from './About.js';
 import '../styles/pages/landing.css';
+import { SearchByPlate } from './common/SearchByPlate';
+import ReviewList from './common/ReviewList';
+import { useReviews } from '../hooks/use-reviews';
 
 export const LandingPage = () => {
+  const { reviews, plateFilter, setPlateFilter } = useReviews('reviews');
+
   return (
       <main className="home">
         <section className="landing-top">
@@ -21,7 +25,8 @@ export const LandingPage = () => {
             </article>
           </article>
         </section>
-        <ReviewList />
+        <SearchByPlate search={plateFilter} setSearch={setPlateFilter} />
+        <ReviewList reviews={reviews} canClickPlate={true} />
       </main>
   );
 };

@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const StateSelect = ({ state, setState }) => {
   return (
         <select
