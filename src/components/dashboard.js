@@ -9,19 +9,21 @@ import { useReviews } from '../hooks/use-reviews';
 import { SearchByPlate } from './common/SearchByPlate';
 
 export const Dashboard = () => {
-  const { isLoading, userInfo } = useAuthTasks();
-  const { plates } = usePlates(userInfo?.id);
+  const { userId, username } = JSON.parse(localStorage.getItem('user'));
+
+  const { plates } = usePlates(userId);
   const { reviews, plateFilter, setPlateFilter } = useReviews('reviews');
 
   const [submitReview, setSubmitReview] = useState(false);
 
+  const { isLoading } = useAuthTasks();
   if (isLoading) return <p>Authenticating...</p>;
 
   return (
     <main className="dashboard">
       <PagesNav />
       <section className="dashboard-greeting">
-        <p className="greeting-text">hey there, {userInfo?.username}</p>
+        <p className="greeting-text">hey there, {username}</p>
       </section>
       <button
         className="add-review"
