@@ -6,14 +6,19 @@ import { usePlates } from '../hooks/use-plates';
 
 export const MyPlatesList = () => {
   const navigate = useNavigate();
-  const { plates } = usePlates();
+
+  console.log(localStorage)
+
+  const { plates } = usePlates(localStorage.userId);
+
+  console.log(plates)
 
   const myPlateClick = (plate) => {
     const plateEndpoint = `/my-plates/id/${plate.id}`;
-    navigate(plateEndpoint);
+    navigate(plateEndpoint, { state: { plate } });
   };
 
-  const totalPlates = localStorage.hasPlates === '' || plates.length === 0 ? 
+  const totalPlates = plates.length === 0 ? 
     'No plates associated' : 
     `Total Plates Owned: ${plates.length}`;
 

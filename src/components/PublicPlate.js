@@ -1,11 +1,15 @@
-import React  from 'react'; 
+import React from 'react'; 
 import PagesNav from './PagesNav';
 import '../styles/plates/public-plate.css';
-import PlateAndReviews from './common/PlateAndReviews';
-import { useParams } from 'react-router-dom';
+import Plate from './common/Plate';
+import { Spinner } from 'reactstrap';
+import { usePlate } from '../hooks/use-plate';
+import ReviewList from './common/ReviewList';
 
 export const PublicPlate = () => {
-  const { id } = useParams();
+  const { plate, reviews } = usePlate();
+
+  if (!plate) return <Spinner />;
   
   return (
     /* FETCHING PUBLIC PLATES & REVIEWS 
@@ -17,10 +21,8 @@ export const PublicPlate = () => {
     
     <section className="plate-div">
       <PagesNav />
-      <PlateAndReviews 
-        fetchPlateUrl={`plates/${id}`} 
-        fetchReviewsUrl={`reviews/plate/${id}`} 
-      /> 
+      <Plate plate={plate} />
+      <ReviewList reviews={reviews} />
     </section>
 
   ); 

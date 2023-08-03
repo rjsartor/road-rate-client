@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../config";
 
-export const usePlates = (user) => {
+export const usePlates = (userId) => {
     const [plates, setPlates] = useState([]);
 
     useEffect(() => {
-        if (!user) return;
+        if (!userId) return;
+
+        console.log('userId', userId)
 
         const fetchPlates = async () => {
-          const res = await fetch(`${API_BASE_URL}/plates/all/${user.id}`)
+          const res = await fetch(`${API_BASE_URL}/plates/all/${userId}`)
           const plates = await res.json();
 
           if (plates) {
@@ -18,7 +20,7 @@ export const usePlates = (user) => {
         }
     
         fetchPlates();
-      }, [user]);
+      }, [userId]);
 
 
     return { plates };

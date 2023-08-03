@@ -65,6 +65,10 @@
   margin-right: 12px;
 }
 
+button[disabled] { 
+  pointer-events: none;
+}
+
 .owner-comment {
   color: darkslategrey;
   text-align: left;

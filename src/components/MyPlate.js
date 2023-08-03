@@ -1,20 +1,20 @@
 import React from 'react';
 import PagesNav from './PagesNav';
-import PlateAndReviews from './common/PlateAndReviews';
-import '../styles/plates/single-plate.css';
-import { useParams } from 'react-router-dom';
 import UnclaimPlate from './UnclaimPlate';
+import Plate from './common/Plate';
+import { usePlate } from '../hooks/use-plate';
+import { Review } from './common/Review';
+import '../styles/plates/single-plate.css';
+import ReviewList from './common/ReviewList';
 
 export const MyPlate = () => {
-  const { id } = useParams();
-  
+  const { plate, reviews } = usePlate();
+
   return (
     <main className="plate-div">
       <PagesNav />
-      <PlateAndReviews 
-        fetchPlateUrl={`plates/${id}`} 
-        fetchReviewsUrl={`reviews/my-plates/${id}`} 
-      /> 
+      <Plate plate={plate} />
+      <ReviewList reviews={reviews} userPlate={true} />
       <UnclaimPlate />
     </main>
   );
