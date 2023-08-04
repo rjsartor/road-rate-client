@@ -31,7 +31,7 @@ export const Review = ({ review, canClickPlate = true, userPlate = false }) => {
     : <MaterialIcon icon="thumb_down" />;
 
   return (
-        <li className='review-item' key={_id} index-key={_id} tabIndex='0'>
+        <li className='review-item' key={_id} tabIndex='0'>
             <article className='review-header'>
               <article className='review-title'>
               <img className='isClaimed-icon' src='https://cdn4.iconfinder.com/data/icons/flatastic-11-1/256/user-green-512.png' alt='green user icon'></img>

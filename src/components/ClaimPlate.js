@@ -104,7 +104,7 @@ const ClaimPlate = () => {
       if (plate?.isOwned) {
         plateAction = (
           <>
-            <td>'ALREADY CLAIMED'</td>
+            <td>ALREADY CLAIMED</td>
             <tr>
               <td colSpan="4">
                 <p>Need to <strong>Unlink</strong> your plate? Go to:</p>

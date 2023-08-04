@@ -18,7 +18,6 @@ export const useAuthTasks = () => {
     } catch (error) {
       console.error('Failed to get access token:', error);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchUserInfo = useCallback(async () => {
@@ -35,7 +34,6 @@ export const useAuthTasks = () => {
     } catch (error) {
       console.error('Failed to fetch user information:', error);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const handleLogout = () => {

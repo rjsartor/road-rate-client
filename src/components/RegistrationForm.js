@@ -109,7 +109,6 @@ export const RegistrationForm = () => {
     validateChar(password);
     validatePasswordLength(password);
     validateUsername(username);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username, password]);
 
   /* ====== HANDLE FORM SUBMIT ====== */
@@ -310,7 +309,6 @@ export const RegistrationForm = () => {
             aria-label="confirm email"
           />
           <button
-            waves="light "
             type="submit"
             aria-label="submit button registration form"
             className="registration-submit"
