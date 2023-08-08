@@ -1,22 +1,15 @@
 import React from 'react';
-import LandingNav from './landing-nav';
-import ReviewList from './review-list';
-import About from './about.js';
+import LandingNav from './LandingNav';
+import About from './AboutPage.js';
 import '../styles/pages/landing.css';
+import { SearchByPlate } from './common/SearchByPlate';
+import ReviewList from './common/ReviewList';
+import { useReviews } from '../hooks/use-reviews';
 
 export const LandingPage = () => {
+  const { reviews, plateFilter, setPlateFilter } = useReviews('reviews');
 
-    // const accessToken = localStorage.getItem('accessToken');
-    // const navigate = useNavigate();
-
-    // console.log('accessToken', accessToken)
-
-    // if (accessToken) {
-    //   console.log('should nav')
-    //   navigate('/dashboard');
-    // }
-
-    return (
+  return (
       <main className="home">
         <section className="landing-top">
           <LandingNav />
@@ -28,13 +21,14 @@ export const LandingPage = () => {
               <p id='anonymous'>100% anonymous.</p>
               <article className="about">
                 <About />
-              </article>  
-            </article>   
+              </article>
+            </article>
           </article>
         </section>
-        <ReviewList />
+        <SearchByPlate search={plateFilter} setSearch={setPlateFilter} />
+        <ReviewList reviews={reviews} canClickPlate={true} />
       </main>
-    );
-}
+  );
+};
 
 export default LandingPage;

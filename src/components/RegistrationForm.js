@@ -1,71 +1,71 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../config';
 
 export const RegistrationForm = () => {
   // split state into different declarations
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [email, setEmail] = useState("")
-  const [confirmEmail, setConfirmEmail] = useState("")
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [confirmEmail, setConfirmEmail] = useState('');
   // eslint-disable-next-line no-unused-vars
-  const [authToken, setAuthToken] = useState("") 
-  const [loggedIn, setLoggedIn] = useState(true)
-  const [validUsername, SetValidUsername] = useState('')
-  const [validPasswordLength, SetValidPasswordLength] = useState(false)
-  const [validPasswordCharacters, SetValidPasswordCharacters] = useState(false)
+  const [authToken, setAuthToken] = useState('');
+  const [loggedIn, setLoggedIn] = useState(true);
+  const [validUsername, SetValidUsername] = useState('');
+  const [validPasswordLength, SetValidPasswordLength] = useState(false);
+  const [validPasswordCharacters, SetValidPasswordCharacters] = useState(false);
 
   const navigate = useNavigate();
 
   /* ====== LOGIN USER AFTER SUCCESSFUL REGISTRATION ====== */
   const logIn = data => {
-    setUsername(username)
-    setLoggedIn(loggedIn)
-    localStorage.removeItem("logout")
+    setUsername(username);
+    setLoggedIn(loggedIn);
+    localStorage.removeItem('logout');
 
     const headers = {
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    }
+      Accept: 'application/json'
+    };
 
-      return fetch(`${API_BASE_URL}/auth/login`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({
-          username,
-          password
-        })
+    return fetch(`${API_BASE_URL}/auth/login`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        username,
+        password
       })
+    })
       .then(res => {
         return res.json();
       })
-      .then( ( auth ) => {  
-        if (auth.hasOwnProperty("authToken")){
-          localStorage.setItem("user", username);
-          localStorage.setItem("loggedIn", loggedIn);
-          localStorage.setItem("authToken", auth.authToken);
-          setAuthToken(auth)
+      .then((auth) => {
+        if (auth.hasOwnProperty('authToken')) {
+          localStorage.setItem('user', username);
+          localStorage.setItem('loggedIn', loggedIn);
+          localStorage.setItem('authToken', auth.authToken);
+          setAuthToken(auth);
         }
         return auth;
       })
       .catch(err => {
         const { code } = err;
         const message = code === 401 ? 'Incorrect username or password' : 'Unable to login, please try again';
-        
+
         return Promise.reject(
           new Error({
             _error: message
           })
-        )
+        );
       });
-  }
+  };
 
-   /* ====== USERNAME VALIDATION ====== */
+  /* ====== USERNAME VALIDATION ====== */
   const validateUsername = async (username) => {
     // send username to server on Change of `username` state
-    // server should check if username exists 
+    // server should check if username exists
 
     const res = await fetch(
       `${API_BASE_URL}/users/?search=${username}`
@@ -73,49 +73,48 @@ export const RegistrationForm = () => {
 
     // Pull out the data from response
     const _username = await res.json();
-   
+
     // if the username exists in the DB
-    if(_username.length > 0 && validUsername !== '') {
-      localStorage.setItem('validUsername', `Username "${_username[0].username}" taken. Pick another.`)
-      SetValidUsername(false)
-      return _username
-    } 
-    
-    localStorage.setItem('validUsername', 'Valid Username')
-    SetValidUsername(true)
+    if (_username.length > 0 && validUsername !== '') {
+      localStorage.setItem('validUsername', `Username "${_username[0].username}" taken. Pick another.`);
+      SetValidUsername(false);
+      return _username;
+    }
+
+    localStorage.setItem('validUsername', 'Valid Username');
+    SetValidUsername(true);
     return _username;
-  }
+  };
 
   /* ====== PASSWORD VALIDATION ====== */
-  const re = /(.*[A-Z].*)/; //positive look ahead for atleast 1 capital char
+  const re = /(.*[A-Z].*)/; // positive look ahead for atleast 1 capital char
   const validateChar = (password) => {
     if (re.test(password)) {
-      SetValidPasswordCharacters(true)
+      SetValidPasswordCharacters(true);
     } else {
-      SetValidPasswordCharacters(false)
+      SetValidPasswordCharacters(false);
     }
-  }
+  };
 
   const validatePasswordLength = (password) => {
     if (password.length && password.length >= 8 && password.length <= 72) {
-      SetValidPasswordLength(true)
+      SetValidPasswordLength(true);
     } else {
-      SetValidPasswordLength(false)
+      SetValidPasswordLength(false);
     }
-  }
+  };
 
   /* ====== USEEFFECT ====== */
   useEffect(() => {
     validateChar(password);
     validatePasswordLength(password);
     validateUsername(username);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [username, password]) 
-  
-   /* ====== HANDLE FORM SUBMIT ====== */
+  }, [username, password]);
+
+  /* ====== HANDLE FORM SUBMIT ====== */
   const handleSubmit = e => {
-    e.preventDefault(); 
-   
+    e.preventDefault();
+
     setUsername(username);
     setPassword(password);
     setConfirmPassword(confirmPassword);
@@ -126,7 +125,7 @@ export const RegistrationForm = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        Accept: 'application/json'
       },
       body: JSON.stringify({
         name,
@@ -137,33 +136,33 @@ export const RegistrationForm = () => {
         confirmEmail
       })
     })
-    .then(res => {
-      localStorage.setItem("registered", true)
-      return res.json();
+      .then(res => {
+        localStorage.setItem('registered', true);
+        return res.json();
       })
-    .then(data => {
-      logIn(data)
-    })
-    .catch(err => {
-      if(err === 'TypeError: Failed to fetch'){
-        return Promise.reject(err)
-      }
-    })
+      .then(data => {
+        logIn(data);
+      })
+      .catch(err => {
+        if (err === 'TypeError: Failed to fetch') {
+          return Promise.reject(err);
+        }
+      });
   };
 
   /* ====== JSX USERNAME VALIDATION ====== */
   let usernameValidation;
 
-  if(validUsername === ''){
-    usernameValidation = <p></p>
+  if (validUsername === '') {
+    usernameValidation = <p></p>;
   } else if (!validUsername) {
-    usernameValidation = <p>{localStorage.validUsername}</p>
+    usernameValidation = <p>{localStorage.validUsername}</p>;
   }
 
   /* ====== JSX PASSWORD VALIDATION ====== */
   let passwordValidation;
-  if(password === '') {
-    passwordValidation = null
+  if (password === '') {
+    passwordValidation = null;
   } else if (validPasswordLength && validPasswordCharacters) {
     passwordValidation = (
       <div>
@@ -174,7 +173,7 @@ export const RegistrationForm = () => {
           <span><svg className="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><path className="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>Atleast 1 capital letter</span>
         </p>
       </div>
-    )
+    );
   } else if (validPasswordLength && !validPasswordCharacters) {
     passwordValidation = (
       <div>
@@ -185,7 +184,7 @@ export const RegistrationForm = () => {
           Atleast 1 Capital Letter
         </p>
       </div>
-    )
+    );
   } else if (validPasswordLength) {
     passwordValidation = (
       <div>
@@ -196,7 +195,7 @@ export const RegistrationForm = () => {
           Atleast 1 capital letter
         </p>
       </div>
-    )
+    );
   } else if (validPasswordCharacters) {
     passwordValidation = (
       <div>
@@ -207,7 +206,7 @@ export const RegistrationForm = () => {
            <span><svg className="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><path className="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>Atleast 1 capital letter</span>
         </p>
       </div>
-    )
+    );
   } else {
     passwordValidation = (
       <div>
@@ -218,7 +217,7 @@ export const RegistrationForm = () => {
           Atleast 1 capital letter
         </p>
       </div>
-    )
+    );
   }
 
   /* ====== RENDER JSX ====== */
@@ -226,7 +225,7 @@ export const RegistrationForm = () => {
     <section className="registration">
     {
       localStorage.loggedIn ? (
-        navigate("/dashboard")
+        navigate('/dashboard')
       ) : (
       <article className="registration-form">
         <form className="registration-form"
@@ -238,7 +237,7 @@ export const RegistrationForm = () => {
             placeholder="optional nickname"
             type="text"
             name="name"
-            aria-label="name"      
+            aria-label="name"
           />
 
           {/* ====== USERNAME VALIDATION ====== */}
@@ -253,26 +252,26 @@ export const RegistrationForm = () => {
             name="username"
             id="register-username"
             required
-            aria-label="username"    
+            aria-label="username"
           />
 
           {/* ====== PASSWORD VALIDATION ====== */}
           {passwordValidation}
 
           <fieldset className="registration-form-group">
-            <input 
-              className="registration-password-input" 
-              type="password" 
-              name="password" 
-              autoComplete="new-password" 
-              id="password" 
+            <input
+              className="registration-password-input"
+              type="password"
+              name="password"
+              autoComplete="new-password"
+              id="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
               placeholder="enter password"
               required
-              pattern="(?=.*[A-Z]).{8,}$" 
+              pattern="(?=.*[A-Z]).{8,}$"
               title="Must contain at least one uppercase letter and at least 8 or more characters"
-              aria-label="password"  
+              aria-label="password"
             />
 
         </fieldset>
@@ -284,9 +283,9 @@ export const RegistrationForm = () => {
             type="password"
             name="passwordConfirm"
             required
-            pattern={password} 
+            pattern={password}
             title={`password: "${password}" & confirmPassword: "${confirmPassword}" must match`}
-            aria-label="confirm Password"  
+            aria-label="confirm Password"
           />
           <input
             value={email}
@@ -296,7 +295,7 @@ export const RegistrationForm = () => {
             name="email"
             pattern="^([\w\-\.]+)@((\[([0-9]{1,3}\.){3}[0-9]{1,3}\])|(([\w\-]+\.)+)([a-zA-Z]{2,4}))$"
             required
-            aria-label="email"  
+            aria-label="email"
           />
           <input
             value={confirmEmail}
@@ -307,29 +306,28 @@ export const RegistrationForm = () => {
             pattern={email}
             title={`email: "${email}" & confirmEmail: "${confirmEmail}" must match`}
             required
-            aria-label="confirm email"  
+            aria-label="confirm email"
           />
-          <button 
-            waves="light "
-            type="submit" 
-            aria-label="submit button registration form"  
+          <button
+            type="submit"
+            aria-label="submit button registration form"
             className="registration-submit"
             disabled={ !username || !password || !validUsername }
           >
             Submit
           </button>
-          <Link 
-            to="/" 
-            className="registration-link" 
+          <Link
+            to="/"
+            className="registration-link"
             aria-label="go back link to landing page"
           >
             Go Back
           </Link>
         </form>
       </article>
-      )}   
+      )}
     </section>
   );
-}
+};
 
 export default RegistrationForm;
