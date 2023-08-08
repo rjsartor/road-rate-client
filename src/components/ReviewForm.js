@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { API_BASE_URL } from '../config';
 import '../styles/forms/review-form.css';
-import { StateSelect } from './StateSelect';
+import { StateSelect } from './common/StateSelect';
 
-export const ReviewForm = (props) => {
+export const ReviewForm = ({ plates }) => {
   const [plateNumber, setPlateNumber] = useState('');
   const [rating, setRating] = useState('');
   const [message, setMessage] = useState('');
@@ -11,7 +11,7 @@ export const ReviewForm = (props) => {
   const [submitted, setSubmitted] = useState(false);
   const [invalidMessage, setInvalidMessage] = useState('');
 
-  const userPlates = props.plates.map(plate => {
+  const userPlates = plates.map(plate => {
     return {
       userPlateNumber: plate.plateNumber,
       userPlateState: plate.plateState
