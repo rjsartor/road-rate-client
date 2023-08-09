@@ -1,10 +1,10 @@
 import React from 'react';
-import LandingNav from './LandingNav';
-import About from './AboutPage.js';
-import '../styles/pages/landing.css';
+import About from './About.js';
 import { SearchByPlate } from './common/SearchByPlate';
 import ReviewList from './common/ReviewList';
 import { useReviews } from '../hooks/use-reviews';
+import '../styles/pages/landing.css';
+import '../styles/navbars/landing-nav.css';
 
 export const LandingPage = () => {
   const { reviews, plateFilter, setPlateFilter } = useReviews('reviews');
@@ -12,7 +12,14 @@ export const LandingPage = () => {
   return (
       <main className="home">
         <section className="landing-top">
-          <LandingNav />
+          <div className="navbar">
+            <ul className="nav-list">
+                <li className="nav-item"></li>
+                <li className="nav-item">
+                    <button className="add-review" onClick={() => loginWithRedirect()}>Login</button>
+                </li>
+            </ul>
+          </div>
           <article className='landing-content'>
             <article className='landing-text'>
               <h1>RoadRate</h1>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import PagesNav from './PagesNav';
-import '../styles/plates/my-plates-list.css';
-import { usePlates } from '../hooks/use-plates';
+import PagesNav from '../PagesNav';
+import '../../styles/plates/my-plates-list.css';
+import { usePlates } from '../../hooks/use-plates';
 
 export const MyPlatesList = () => {
   const navigate = useNavigate();

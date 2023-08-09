@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { API_BASE_URL } from '../config';
-import PagesNav from './PagesNav';
-import '../styles/plates/claim-plate.css';
-import { StateSelect } from './common/StateSelect';
+import { API_BASE_URL } from '../../config';
+import PagesNav from '../PagesNav';
+import '../../styles/plates/claim-plate.css';
+import { StateSelect } from '../common/StateSelect';
 
 const ClaimPlate = () => {
   const [plateNumber, setPlateNumber] = useState('');

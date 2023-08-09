@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { API_BASE_URL } from '../config';
-import '../styles/forms/review-form.css';
-import { StateSelect } from './common/StateSelect';
-import { usePlates } from '../hooks/use-plates';
+import { API_BASE_URL } from '../../config';
+import '../../styles/forms/review-form.css';
+import { StateSelect } from '../common/StateSelect';
+import { usePlates } from '../../hooks/use-plates';
 
 const ReviewForm = ({ userId }) => {
   const { plates: userPlates } = usePlates(userId);

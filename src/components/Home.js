@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ReviewForm from './ReviewForm';
+import ReviewForm from './forms/ReviewForm';
 import PagesNav from './PagesNav';
 import { useAuthTasks } from '../hooks/use-auth-tasks';
 import '../styles/pages/dashboard.css';
@@ -7,7 +7,7 @@ import ReviewList from './common/ReviewList';
 import { useReviews } from '../hooks/use-reviews';
 import { SearchByPlate } from './common/SearchByPlate';
 
-export const Dashboard = () => {
+export const Home = () => {
   const user = JSON.parse(localStorage.getItem('user'));
 
   const { reviews, plateFilter, setPlateFilter } = useReviews('reviews');
@@ -36,4 +36,4 @@ export const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Home;

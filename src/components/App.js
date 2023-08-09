@@ -1,22 +1,23 @@
 import React from 'react';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import LandingPage from './Landing';
-import Dash from './Dash';
-import LoginForm from './LoginForm';
-import ClaimPlate from './ClaimPlate';
-import PublicPlate from './PublicPlate';
-import MyPlatesList from './MyPlates';
-import MyPlate from './MyPlate';
-import About from './AboutPage';
+import LoginForm from './forms/LoginForm';
+import ClaimPlate from './plates/ClaimPlate';
+import PublicPlate from './plates/PublicPlate';
+import MyPlatesList from './plates/MyPlates';
+import MyPlate from './plates/MyPlate';
+import About from './About';
 import MyReviews from './MyReviews';
+import Home from './Home';
 import '../styles/App.css';
 
 import { Auth0Provider } from '../auth/Auth0Provider';
 
+
 const routesArray = [
   { path: '/', element: <LandingPage /> },
   // { path: "/register", element: <RegistrationPage /> },
-  { path: '/dashboard', element: <Dash /> },
+  { path: '/dashboard', element: <Home /> },
   { path: '/login', element: <LoginForm /> },
   { path: '/plate', element: <PublicPlate /> },
   { path: '/plate/id/:id', element: <PublicPlate /> },

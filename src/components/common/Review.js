@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getElapsedTime } from '../../utils/time.util';
 import MaterialIcon from 'material-icons-react';
-import OwnerResponseForm from '../owner-response-form';
+import OwnerResponseForm from '../forms/OwnerResponseForm';
 import { useState } from 'react';
 
 export const Review = ({ review, canClickPlate = true, userPlate = false }) => {
