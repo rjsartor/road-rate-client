@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import icon from '../assets/thumbs-up.png';
 import '../styles/pages/about.css';
 import { useAuth0 } from '@auth0/auth0-react';
-import Spacer from './Spacer';
+import Spacer from './common/Spacer';
 
 export const About = () => {
   const [modalOpen, setModalOpen] = useState(false);

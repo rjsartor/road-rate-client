@@ -1,10 +1,10 @@
 import React from 'react';
-import PagesNav from './PagesNav';
-import '../styles/plates/public-plate.css';
-import Plate from './common/Plate';
+import PagesNav from '../PagesNav';
+import '../../styles/plates/public-plate.css';
+import Plate from '../common/Plate';
 import { Spinner } from 'reactstrap';
-import { usePlate } from '../hooks/use-plate';
-import ReviewList from './common/ReviewList';
+import { usePlate } from '../../hooks/use-plate';
+import ReviewList from '../common/ReviewList';
 
 export const PublicPlate = () => {
   const { plate, reviews } = usePlate();
