@@ -5,8 +5,10 @@ import ReviewList from './common/ReviewList';
 import { useReviews } from '../hooks/use-reviews';
 import '../styles/pages/landing.css';
 import '../styles/navbars/landing-nav.css';
+import { useAuthTasks } from '../hooks/use-auth-tasks.js';
 
 export const LandingPage = () => {
+  const { loginWithRedirect } = useAuthTasks();
   const { reviews, plateFilter, setPlateFilter } = useReviews('reviews');
 
   return (

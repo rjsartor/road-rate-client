@@ -42,7 +42,7 @@ export const useAuthTasks = () => {
   };
 
   useEffect(() => {
-    if (isLoading || accessToken) return;
+    if (isLoading || accessToken || !user) return;
 
     // Call the function to get the access token
     getAccessToken();
