@@ -3,28 +3,25 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import LandingPage from './Landing';
 import LoginForm from './forms/LoginForm';
 import ClaimPlate from './plates/ClaimPlate';
-import PublicPlate from './plates/PublicPlate';
 import MyPlatesList from './plates/MyPlates';
-import MyPlate from './plates/MyPlate';
 import About from './About';
 import MyReviews from './MyReviews';
 import Home from './Home';
+import PlatePage from './plates/PlatePage';
 import '../styles/App.css';
 
 import { Auth0Provider } from '../auth/Auth0Provider';
-
 
 const routesArray = [
   { path: '/', element: <LandingPage /> },
   // { path: "/register", element: <RegistrationPage /> },
   { path: '/dashboard', element: <Home /> },
   { path: '/login', element: <LoginForm /> },
-  { path: '/plate', element: <PublicPlate /> },
-  { path: '/plate/id/:id', element: <PublicPlate /> },
+  { path: '/plate/id/:id', element: <PlatePage /> },
   { path: '/about', element: <About /> },
   { path: '/claim-plate', element: <ClaimPlate /> },
   { path: '/my-plates', element: <MyPlatesList /> },
-  { path: '/my-plates/id/:id', element: <MyPlate /> },
+  { path: '/my-plates/id/:id', element: <PlatePage /> },
   { path: '/my-reviews', element: <MyReviews /> }
 ];
 

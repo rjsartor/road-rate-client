@@ -4,7 +4,7 @@ import '../../styles/forms/review-form.css';
 import { StateSelect } from '../common/StateSelect';
 import { usePlates } from '../../hooks/use-plates';
 
-const ReviewForm = ({ userId }) => {
+const ReviewForm = ({ userId, initialFormData = {} }) => {
   const { plates: userPlates } = usePlates(userId);
 
   const [formData, setFormData] = useState({
@@ -12,6 +12,7 @@ const ReviewForm = ({ userId }) => {
     rating: '',
     message: '',
     plateState: '',
+    ...initialFormData,
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -100,7 +101,7 @@ const ReviewForm = ({ userId }) => {
         </select>
 
         <label htmlFor='plateState'>State:</label>
-        <StateSelect setState={handleStateSelect} />
+        <StateSelect state={formData.plateState} setState={handleStateSelect} />
 
         <label htmlFor='message'>Message:</label>
         <textarea

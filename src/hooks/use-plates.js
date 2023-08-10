@@ -8,7 +8,7 @@ export const usePlates = (userId) => {
     if (!userId) return;
 
     const fetchPlates = async () => {
-      const res = await fetch(`${API_BASE_URL}/plates/all/${userId}`);
+      const res = await fetch(`${API_BASE_URL}/plates/user/${userId}`);
       const plates = await res.json();
 
       if (plates) {
