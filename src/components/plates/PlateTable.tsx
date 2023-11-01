@@ -37,7 +37,6 @@ const PlateTable: React.FC<PlateTableProps> = ({
         </>
       );
     } else {
-      console.log('there is no plate')
       plateAction = (
         <td>
           <button

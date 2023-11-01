@@ -72,7 +72,7 @@ const PlateSearchForm: React.FC<PlateSearchFormProps> = ({
         </fieldset>
       </form>
     </section>
-  )
+  );
 };
 
 export default PlateSearchForm;

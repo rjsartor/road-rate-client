@@ -40,7 +40,6 @@ class AxiosService {
   }
 
   public async get<T>(url: string, params?: any): Promise<AxiosResponse<T>> {
-    console.log('params', params)
     return this.axiosInstance.get<T>(url, { params });
   }
 

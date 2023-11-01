@@ -21,8 +21,6 @@ const UnclaimPlate: FC<{ plate: PlateType }> = ({ plate }) => {
         plateState,
       });
 
-      console.log(response)
-
       if (response.status === 204) {
         setStatus('success');
       } else {
