@@ -15,10 +15,11 @@ const PlateTable: React.FC<PlateTableProps> = ({
   plate, 
   claimPlate, 
   registerPlate, 
-  plateNumber, 
+  plateNumber,
   plateState,
   successMessage,
 }) => {
+
   let plateAction;
   if (plate) {
     if (plate?.isOwned) {
@@ -36,12 +37,13 @@ const PlateTable: React.FC<PlateTableProps> = ({
         </>
       );
     } else {
+      console.log('there is no plate')
       plateAction = (
         <td>
           <button
             className="register-plate"
             onClick={claimPlate}
-            disabled={!!successMessage} // Ensure you have successMessage in this component's props if necessary
+            disabled={!!successMessage}
           >
             Claim Plate
           </button>
@@ -54,7 +56,7 @@ const PlateTable: React.FC<PlateTableProps> = ({
         <button
           className="register-plate"
           onClick={registerPlate}
-          disabled={!!successMessage} // Ensure you have successMessage in this component's props if necessary
+          disabled={!!successMessage}
         >
           Register Plate
         </button>
@@ -74,13 +76,11 @@ const PlateTable: React.FC<PlateTableProps> = ({
             <th>Add<span className="mobile-hide"> to Your Account</span></th>
             {plateAction && <th>Register <span className="mobile-hide">Your Plate</span></th>}
           </tr>
-          {(plate || plate === undefined) && (
             <tr>
-              <td>{plate === undefined ? plateNumber : plate.plateNumber}</td>
-              <td>{plate === undefined ? plateState : plate.plateState}</td>
+              <td>{plate?.plateNumber || plateNumber}</td>
+              <td>{plate?.plateState || plateState}</td>
               {plateAction}
             </tr>
-          )}
         </tbody>
       </table>
     </section>

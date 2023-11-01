@@ -1,50 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { API_BASE_URL } from '../../config';
+import React, { useState } from 'react';
 import PagesNav from '../PagesNav';
 import '../../styles/plates/claim-plate.css';
 import { StateCode } from '../common/StateSelect';
-import axios from 'axios';
 import PlateSearchForm from '../forms/PlateSearchForm';
 import PlateTable from './PlateTable';
 import { PlateType } from '../../types/plates.types';
+import AxiosService from '../../services/AxiosService';
 
-const HEADERS = {
-  'Content-Type': 'application/json',
-  Accept: 'application/json'
-};
-
-const getAuthToken = () => `Bearer ${localStorage.getItem('authToken')}`;
 const getUserId = () => localStorage.getItem('userId');
 
 const ClaimPlate: React.FC = () => {
-  const [plateNumber, setPlateNumber] = useState<string>('');
-  const [plateState, setPlateState] = useState<StateCode | ''>('');
   const [successMessage, setSuccessMessage] = useState<string>('');
   const [plate, setPlate] = useState<PlateType | null | undefined>(null);
   const [error, setError] = useState<string>('');
+  const [searchNumber, setSearchNumber] = useState<string>('');
+  const [searchState, setSearchState] = useState<string>('');
 
-  const fetchPlate = async () => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/plates/`, {
-        params: { state: plateState, search: plateNumber },
-        headers: { ...HEADERS, Authorization: getAuthToken() }
-      });
-      const [data] = response.data;
-      setPlate(data);
-    } catch (err) {
-      setError('Failed to search for the plate. Please try again.');
-    }
-  };
+  const plateState = plate?.plateState;
+  const plateNumber = plate?.plateNumber;
 
   const registerPlate = async () => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/plates`, {
-        plateNumber: plateNumber.toUpperCase(),
-        plateState,
+      if (!plate) return;
+      const response = await AxiosService.post(`plates`, {
+        plateNumber: plate.plateNumber,
+        plateState: plate.plateState.toUpperCase(),
         userId: getUserId(),
         isOwned: true
-      }, {
-        headers: { ...HEADERS, Authorization: getAuthToken() }
       });
       setSuccessMessage(`Congrats! Your plate ${plateNumber} - ${plateState} was registered.`);
       return response.data;
@@ -55,15 +37,11 @@ const ClaimPlate: React.FC = () => {
 
   const claimPlate = async () => {
     try {
-      localStorage.setItem('myPlate', plateNumber);
-      localStorage.setItem('myState', plateState);
-      
-      const response = await axios.put(`${API_BASE_URL}/plates/${getUserId()}`, {
+      if (!plate) return;
+      const response = await AxiosService.put(`plates/${getUserId()}`, {
         userId: getUserId(),
-        plateNumber: plateNumber.toUpperCase(),
-        plateState
-      }, {
-        headers: { ...HEADERS, Authorization: getAuthToken() }
+        plateNumber: plateNumber,
+        plateState: plateState?.toUpperCase(),
       });
       setSuccessMessage(`Congrats! Your plate ${plateNumber} - ${plateState} was registered.`);
       return response.data;
@@ -72,33 +50,30 @@ const ClaimPlate: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    setError('');
-  }, [plate, plateState]);
-
   return (
     <main className="claim-plate">
       <PagesNav />
       <h2>Claim A Plate</h2>
       <section className="claim-plate-search">
-        <PlateSearchForm 
-          plateNumber={plateNumber}
-          setPlateNumber={setPlateNumber}
-          plateState={plateState as StateCode}
-          setPlateState={setPlateState}
-          fetchPlate={fetchPlate}
+        <PlateSearchForm
+          searchNumber={searchNumber}
+          searchState={searchState as StateCode}
+          setSearchState={setSearchState}
+          setSearchNumber={setSearchNumber}
+          setPlate={setPlate}
           setSuccessMessage={setSuccessMessage}
+          setError={setError}
         />
       </section>
       <section className="plate-table">
-      <PlateTable 
-        plate={plate}
-        claimPlate={claimPlate}
-        registerPlate={registerPlate}
-        plateNumber={plateNumber}
-        plateState={plateState}
-        successMessage={successMessage}
-      />
+        <PlateTable 
+          plate={plate}
+          claimPlate={claimPlate}
+          registerPlate={registerPlate}
+          plateNumber={searchNumber}
+          plateState={searchState}
+          successMessage={successMessage}
+        />
       </section>
       <p>{successMessage}</p>
       {<p>{error}</p>}
