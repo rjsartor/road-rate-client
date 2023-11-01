@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react';
 import { ReviewType } from '../types/reviews.types';
-import axios from 'axios';
-import { API_BASE_URL } from '../config';
+import AxiosService from '../services/AxiosService';
 
 const useReviews = (reviewsUrl: string) => {
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [plateFilter, setPlateFilter] = useState<string>('');
 
   const fetchReviews = async (url: string) => {
-    const response = await axios.get(`${API_BASE_URL}/${url}`);
-    setReviews(response.data);
+    const { data } = await AxiosService.get(url);
+    setReviews(data as ReviewType[]);
   };
 
   useEffect(() => {

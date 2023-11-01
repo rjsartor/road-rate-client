@@ -1,35 +1,29 @@
 import React, { FC, useState } from 'react';
-import axios from 'axios';
-import { API_BASE_URL } from '../../config';
+import AxiosService from '../../services/AxiosService';
+import { PlateType } from '../../types/plates.types';
 
 type UnclaimStatus = 'idle' | 'warning' | 'success' | 'error';
 
-const UnclaimPlate: FC = () => {
+const UnclaimPlate: FC<{ plate: PlateType }> = ({ plate }) => {
+  const { userId, plateNumber, plateState } = plate;
   const [status, setStatus] = useState<UnclaimStatus>('idle');
-
-  const { userId, myPlate, myState, authToken, success } = localStorage;
 
   const toggleWarning = () => setStatus(status === 'warning' ? 'idle' : 'warning');
 
   const unClaimPlateClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    localStorage.setItem('unclaimedPlate', myPlate);
+    // localStorage.setItem('unclaimedPlate', plate);
 
     try {
-      const response = await axios.put(`${API_BASE_URL}/plates/unclaim/${userId}`, {
+      const response = await AxiosService.put(`plates/unclaim/${userId}`, {
         userId,
-        plateNumber: myPlate,
-        plateState: myState
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${authToken}`
-        }
+        plateNumber,
+        plateState,
       });
 
-      if (response.status === 200) {
-        localStorage.setItem('success', 'unclaimed');
+      console.log(response)
+
+      if (response.status === 204) {
         setStatus('success');
       } else {
         console.log('Unclaiming failed:', response.statusText);
@@ -54,7 +48,7 @@ const UnclaimPlate: FC = () => {
               className='confirm-buttons'
               id="unclaim-plate-btn-confirm"
               onClick={unClaimPlateClick}
-              disabled={success === 'unclaimed'}
+              // disabled={success === 'unclaimed'}
             >
               Yes
             </button>

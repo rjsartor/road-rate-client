@@ -34,7 +34,7 @@ export const PlatePage: FC = () => {
       <PagesNav />
       <Plate plate={plate} />
       <ReviewList reviews={reviews} userPlate={userPlate} />
-      <UnclaimPlate />
+      <UnclaimPlate plate={plate} />
       {!userPlate && (
         <Fragment>
           <button

@@ -3,7 +3,7 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import authConfig from './auth0-config';
 import { API_BASE_URL } from '../config';
 import { Auth0Provider as OriginalAuthProvider } from '@auth0/auth0-react';
-import axios from 'axios';
+import AxiosService from '../services/AxiosService';
 
 interface ValidateEmailOptions {
   email: string;
@@ -11,8 +11,8 @@ interface ValidateEmailOptions {
 
 const validateEmail = async ({ email }: ValidateEmailOptions): Promise<boolean> => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/users/?search=${email}`);
-    const emails: string[] = response.data;
+    const response = await AxiosService.get(`users/?search=${email}`);
+    const emails: string[] = response.data as string[];
     return !emails.length;
   } catch (error) {
     console.error('Error validating email:', error);
@@ -31,13 +31,8 @@ export const findOrCreateUser = async (options: FindOrCreateUserOptions): Promis
   }
 
   try {
-    const response = await axios.post(`${API_BASE_URL}/users/user`, options, {
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-    });
-    return response.data;
+    const { data } = await AxiosService.post(`users/user`, options);
+    return data;
   } catch (error) {
     console.error('Error finding or creating user:', error);
     throw error;

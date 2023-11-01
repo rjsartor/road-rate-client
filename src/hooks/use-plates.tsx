@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { API_BASE_URL } from '../config';
 import { PlateType } from '../types/plates.types';
+import AxiosService from '../services/AxiosService';
 
 export const usePlates = (userId: string): { plates: PlateType[] } => {
   const [plates, setPlates] = useState<PlateType[]>([]);
@@ -11,7 +10,7 @@ export const usePlates = (userId: string): { plates: PlateType[] } => {
 
     const fetchPlates = async () => {
       try {
-        const response = await axios.get<PlateType[]>(`${API_BASE_URL}/plates/user/${userId}`);
+        const response = await AxiosService.get<PlateType[]>(`plates/user/${userId}`);
 
         if (response.data) {
           setPlates(response.data);

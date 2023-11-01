@@ -79,7 +79,7 @@ export const StateSelect: React.FC<StateSelectProps> = ({ state, setState }) => 
       >
           <option value=''>State</option>
           {STATES.map(s => (
-              <option key={s.name} value={s.name}>{s.code}</option>
+              <option key={s.name} value={s.code}>{s.code}</option>
           ))}
       </select>
   );

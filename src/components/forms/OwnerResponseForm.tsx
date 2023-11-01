@@ -1,6 +1,5 @@
 import React, { useState, FormEvent } from 'react';
-import axios from 'axios';
-import { API_BASE_URL } from '../../config';
+import AxiosService from '../../services/AxiosService';
 
 interface OwnerResponseFormProps {
     reviewId: string;
@@ -17,14 +16,8 @@ export const OwnerResponseForm: React.FC<OwnerResponseFormProps> = ({ reviewId, 
         setError(null);
 
         try {
-            const response = await axios.put(`${API_BASE_URL}/reviews/${reviewId}`, {
+            const response = await AxiosService.put(`reviews/${reviewId}`, {
                 ownerResponse
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                    Authorization: `Bearer ${localStorage.authToken}`
-                }
             });
 
             if (response.status === 200) {

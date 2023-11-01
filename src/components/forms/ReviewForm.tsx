@@ -1,9 +1,8 @@
 import React, { useState, useEffect, FC } from 'react';
-import { API_BASE_URL } from '../../config';
 import '../../styles/forms/review-form.css';
 import { StateCode, StateSelect } from '../common/StateSelect';
 import { usePlates } from '../../hooks/use-plates';
-import axios from 'axios';
+import AxiosService from '../../services/AxiosService';
 
 interface ReviewFormProps {
   userId: string;
@@ -51,19 +50,13 @@ const ReviewForm: FC<ReviewFormProps> = ({ userId, initialFormData = {} }) => {
     const user = JSON.parse(localStorage.user);
 
     try {
-      const res = await axios.post(`${API_BASE_URL}/reviews`, {
+      const res = await AxiosService.post(`reviews`, {
         ...formData,
         plateNumber: formData.plateNumber.toUpperCase(),
         username: user.username,
         reviewerId: user.id,
       },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${localStorage.authToken}`
-        },
-      });
+     );
 
       if (res.status === 201) {
         setSubmitted(true);
