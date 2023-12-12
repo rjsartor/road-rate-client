@@ -16,19 +16,18 @@ const ClaimPlate: React.FC = () => {
   const [searchNumber, setSearchNumber] = useState<string>('');
   const [searchState, setSearchState] = useState<string>('');
 
-  const plateState = plate?.plateState;
-  const plateNumber = plate?.plateNumber;
+  const payload = {
+    plateNumber: searchNumber,
+    plateState: searchState,
+    userId: getUserId(),
+    isOwned: true,
+  }
 
+  // refactor to use a single function
   const registerPlate = async () => {
     try {
-      if (!plate) return;
-      const response = await AxiosService.post(`plates`, {
-        plateNumber: plate.plateNumber,
-        plateState: plate.plateState.toUpperCase(),
-        userId: getUserId(),
-        isOwned: true
-      });
-      setSuccessMessage(`Congrats! Your plate ${plateNumber} - ${plateState} was registered.`);
+      const response = await AxiosService.post(`plates`, payload);
+      setSuccessMessage(`Congrats! Your plate ${searchNumber} - ${searchState} was registered.`);
       return response.data;
     } catch (err) {
       setError('Failed to register the plate. Please try again.');
@@ -37,13 +36,8 @@ const ClaimPlate: React.FC = () => {
 
   const claimPlate = async () => {
     try {
-      if (!plate) return;
-      const response = await AxiosService.put(`plates/${getUserId()}`, {
-        userId: getUserId(),
-        plateNumber: plateNumber,
-        plateState: plateState?.toUpperCase(),
-      });
-      setSuccessMessage(`Congrats! Your plate ${plateNumber} - ${plateState} was registered.`);
+      const response = await AxiosService.put(`plates/${getUserId()}`, payload);
+      setSuccessMessage(`Congrats! Your plate ${searchNumber} - ${searchState} was registered.`);
       return response.data;
     } catch (err) {
       setError('Failed to claim the plate. Please try again.');
