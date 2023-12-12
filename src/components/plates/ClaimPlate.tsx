@@ -21,7 +21,7 @@ const ClaimPlate: React.FC = () => {
     plateState: searchState,
     userId: getUserId(),
     isOwned: true,
-  }
+  };
 
   // refactor to use a single function
   const registerPlate = async () => {
