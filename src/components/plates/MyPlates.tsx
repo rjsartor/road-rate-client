@@ -4,6 +4,7 @@ import PagesNav from '../PagesNav';
 import '../../styles/plates/my-plates-list.css';
 import { usePlates } from '../../hooks/use-plates';
 import { PlateType } from '../../types/plates.types';
+import LicensePlate from '../common/LicensePlate';
 
 
 const MyPlatesList: FC = () => {
@@ -32,10 +33,10 @@ const MyPlatesList: FC = () => {
         {plates.map((plate, index) => (
           <li className='plate-list-item' key={index}>
             <button
-              className="my-plate-btn"
+              key={index}
               onClick={() => myPlateClick(plate)}
             >
-              {plate.plateNumber} - {plate.plateState}
+              <LicensePlate plateNumber={plate.plateNumber} plateState={plate.plateState} style={{ height: 150, width: 300, fontSize: 72 }} />
             </button>
           </li>
         ))}

@@ -1,7 +1,6 @@
 import React, { FC }from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import authConfig from './auth0-config';
-import { API_BASE_URL } from '../config';
 import { Auth0Provider as OriginalAuthProvider } from '@auth0/auth0-react';
 import AxiosService from '../services/AxiosService';
 

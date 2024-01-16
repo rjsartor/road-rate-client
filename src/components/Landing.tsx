@@ -11,8 +11,6 @@ const LandingPage: FC = () => {
   const { loginWithRedirect } = useAuthTasks();
   const { reviews, plateFilter, setPlateFilter } = useReviews('reviews');
 
-  console.log('reviews', reviews);
-
   return (
     <main className="home">
       <section className="landing-top">

@@ -18,22 +18,6 @@ export const About: FC = () => {
 
   const onClose = (): void => setModalOpen(false);
 
-  // const clickOutside = (
-  //   ref: React.RefObject<HTMLDivElement>, 
-  //   onClose: () => void
-  // ): (() => void) => {
-  //   const statusChange = (e: MouseEvent) => {
-  //     // if (!ref.current.contains(e.target)){
-  //     //     setModalOpen(modalOpen)
-  //     //     onClose();
-  //     // }
-  //   };
-  //   document.addEventListener('click', statusChange);
-  //   return (): void => {
-  //     document.removeEventListener('click', statusChange);
-  //   };
-  // };
-
   const Button: FC = () => {
     return (
         <button className="close" onClick={() => setModalOpen(false)}>X</button>
@@ -42,7 +26,6 @@ export const About: FC = () => {
 
   const AboutModal: FC<AboutModalProps> = ({ title }) => {
     const modalRef = useRef<HTMLDivElement>(null);
-    // useEffect(() => clickOutside(modalRef, onClose), [modalRef, onClose]);
 
     return (
         <div className="overlay">

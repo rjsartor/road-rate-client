@@ -9,55 +9,38 @@
   color: grey;
 }
 
-.public-plate-wrapper-positive {
-  text-align: center;
-  /* border-top: 1px solid darkgreen;
-  border-bottom: 1px solid darkgreen; */
-  padding: 6px;
-  /* background: darkgreen; */
-  background-image: linear-gradient(to right bottom, rgb(189, 207, 140),#348663);
-  color: white;
-  box-shadow: 0 1px 4px 0 rgba(0,0,0,.45);
-  width: 100vw;
-  box-sizing: border-box;
-  height: 175px;
-  display: flex;
-  margin-top: -10px;
-}
-
-.public-plate-wrapper-negative {
-  text-align: center;
-  /* border-top: 1px solid darkred;
-  border-bottom: 1px solid darkred; */
-  padding: 6px;
-  /* background: darkred; */
-  background-image: linear-gradient(to right bottom, rgb(207, 159, 140),#863456);
-  color: white;
-  box-shadow: 0 1px 4px 0 rgba(0,0,0,.45);
-  width: 100vw;
-  box-sizing: border-box;
-  height: 175px;
-  display: flex;
-  margin-top: -10px;
-}
-
-.public-plate-wrapper-neutral {
+.public-plate {
   text-align: center;
   border-top: 1px solid grey;
   border-bottom: 1px solid grey;
-  padding: 6px;
+  padding-top: 28px;
   background:grey;
   color: white;
   box-shadow: 0 1px 4px 0 rgba(0,0,0,.45);
-  width: 100vw;
-  box-sizing: border-box;
+  width: 75%;
   height: 175px;
   display: flex;
-  margin-bottom: 20px;
-  margin-top: -10px;
+  flex-direction: column;
+  align-self: center;
+}
+
+.wrapper-positive {
+  background-image: linear-gradient(to right bottom, rgb(189, 207, 140),#348663);
+}
+
+.wrapper-negative {
+  background-image: linear-gradient(to right bottom, #8B0000, #550000);
+}
+
+.wrapper-neutral {
+  background: linear-gradient(to right bottom, #cccccc, #333333)
 }
 
 .plate-info p {
   margin: 2px
 }
 
+.plate-div {
+  display: flex;
+  flex-direction: column;
+}

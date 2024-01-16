@@ -43,9 +43,14 @@ input:hover {
   border-color: rgb(52, 110, 98);
 }
 
+button {
+  border: none;
+}
+
 button:hover {
-  background-color: palevioletred;
+  /* background-color: palevioletred; */
   color: #414141;
+  cursor: pointer;
 }
 
 img {

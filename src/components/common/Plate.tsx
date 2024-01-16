@@ -5,6 +5,7 @@ interface PlateProps {
   plate: PlateType;
 }
 
+// TODO: delete
 const Plate: FC<PlateProps> = ({ plate }) => {
   if (!plate) return <p>Loading plate...</p>;
 

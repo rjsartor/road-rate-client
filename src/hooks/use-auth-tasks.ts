@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth0, User } from '@auth0/auth0-react';
 import { UserType } from '../types/auth.types';
 
-
 interface AuthTasksReturn {
   isAuthenticated: boolean;
   isLoading: boolean;
