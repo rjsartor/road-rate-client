@@ -34,6 +34,7 @@
   height: 75%;
   width: 75%;
   overflow: auto;
+  padding: 48px;
 }
 
 .about-demo {
@@ -69,13 +70,14 @@
   font-weight: bold;
   position: absolute;
   top: 0px;
-  right: 6px;
+  right: 20px;
   display: flex;
   justify-content: center;
   background: whitesmoke;
   border-radius: 4px;
-  margin-left: 4px;
-  margin-bottom: 20px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
 }
 
 .register-link {

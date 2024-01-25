@@ -59,6 +59,7 @@ const Review: FC<ReviewProps> = ({ review, canClickPlate = true, userPlate = fal
       {ownerResponse && <article className="owner-comment">
         <p>{userPlate ? 'Your' : 'Driver'} Response: {ownerResponse}</p>
       </article>}
+      <p className="elapsed-time">{timePassed}</p>
       {!ownerResponse && userPlate && (
         <button
           id="owner-response-btn"
@@ -68,7 +69,6 @@ const Review: FC<ReviewProps> = ({ review, canClickPlate = true, userPlate = fal
         </button>
       )}
       {showResponseForm && <OwnerResponseForm reviewId={review._id} />}
-      <p className="elapsed-time">{timePassed}</p>
     </li>
   );
 };
