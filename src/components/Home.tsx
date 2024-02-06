@@ -12,9 +12,14 @@ const Home: FC = () => {
   const userJSON = localStorage.getItem('user');
   const user: UserType | null = userJSON ? JSON.parse(userJSON) : null;
 
-  const { reviews, plateFilter, setPlateFilter } = useReviews('reviews');
+  const { reviews, plateFilter, setPlateFilter, refetch } = useReviews('reviews');
 
   const [submitReview, setSubmitReview] = useState(false);
+
+  const handleSubmitReview = () => {
+    refetch(); 
+    setSubmitReview(false);
+  };
 
   const { isLoading } = useAuthTasks();
   if (isLoading) return <p>Authenticating...</p>;
@@ -31,7 +36,7 @@ const Home: FC = () => {
       >
         <span className="new-review">New Review</span>
       </button>
-      {submitReview && <ReviewForm userId={user?.id || ''} />}
+      {submitReview && <ReviewForm userId={user?.id || ''} handleSubmitReview={handleSubmitReview} />}
       <SearchByPlate search={plateFilter} setSearch={setPlateFilter} />
       <ReviewList reviews={reviews} canClickPlate={true} />
     </main>

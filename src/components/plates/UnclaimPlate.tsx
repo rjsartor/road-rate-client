@@ -35,9 +35,9 @@ const UnclaimPlate: FC<{ plate: PlateType }> = ({ plate }) => {
 
   return (
     <section className="unclaim-div">
-      <button id="unregister-plate-btn" onClick={toggleWarning}>
+      {status === 'idle' && <button id="unregister-plate-btn" onClick={toggleWarning}>
         Unclaim this plate
-      </button>
+      </button>}
       {status === 'warning' && (
         <article className="unclaim-options">
           <p>Are you sure?</p>

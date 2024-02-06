@@ -3,22 +3,25 @@ import PagesNav from '../PagesNav';
 import '../../styles/plates/public-plate.css';
 import '../../styles/plates/single-plate.css';
 import { Spinner } from 'reactstrap';
-import { usePlate } from '../../hooks/use-plate';
+import { UsePlateReturnType, usePlate } from '../../hooks/use-plate';
 import ReviewList from '../common/ReviewList';
 import UnclaimPlate from './UnclaimPlate';
 import ReviewForm from '../forms/ReviewForm';
-import { PlateType } from '../../types/plates.types';
-import { ReviewType } from '../../types/reviews.types';
 import { UserType } from '../../types/auth.types';
 import LicensePlate from '../common/LicensePlate';
 import Spacer from '../common/Spacer';
 
 export const PlatePage: FC = () => {
-  const { plate, reviews }: { plate?: PlateType, reviews: ReviewType[] } = usePlate();
+  const { plate, reviews, refetch } = usePlate();
   const [userPlate, setIsUserPlate] = useState<boolean | null>(null);
   const [submitReview, setSubmitReview] = useState(false);
   
   const user: UserType | null = JSON.parse(localStorage.user || 'null');
+
+  const handleSubmitReview = () => {
+    setSubmitReview(false);
+    refetch();
+  }
   
   useEffect(() => {
     if (!plate || !user) {
@@ -56,6 +59,7 @@ export const PlatePage: FC = () => {
           {submitReview && user?.id && (
             <ReviewForm 
               userId={user?.id} 
+              handleSubmitReview={handleSubmitReview}
               initialFormData={{ 
                 plateNumber: plate.plateNumber,
                 plateState: plate.plateState, 

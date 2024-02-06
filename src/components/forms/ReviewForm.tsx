@@ -6,6 +6,7 @@ import AxiosService from '../../services/AxiosService';
 
 interface ReviewFormProps {
   userId: string;
+  handleSubmitReview: () => void;
   initialFormData?: {
     plateNumber?: string;
     rating?: string;
@@ -14,7 +15,7 @@ interface ReviewFormProps {
   };
 }
 
-const ReviewForm: FC<ReviewFormProps> = ({ userId, initialFormData = {} }) => {
+const ReviewForm: FC<ReviewFormProps> = ({ userId, initialFormData = {}, handleSubmitReview }) => {
   const { plates: userPlates } = usePlates(userId);
 
   const [formData, setFormData] = useState({
@@ -66,6 +67,7 @@ const ReviewForm: FC<ReviewFormProps> = ({ userId, initialFormData = {} }) => {
           message: '',
           plateState: '',
         });
+        handleSubmitReview();
       }
     } catch (error) {
       console.error(error);
@@ -103,7 +105,7 @@ const ReviewForm: FC<ReviewFormProps> = ({ userId, initialFormData = {} }) => {
           <option value='false'>Bad</option>
         </select>
 
-        <label htmlFor='plateState'>State:</label>
+        <label htmlFor='plateState'>Select state:</label>
         <StateSelect state={formData.plateState as StateCode} setState={handleStateSelect} />
 
         <label htmlFor='message'>Message:</label>

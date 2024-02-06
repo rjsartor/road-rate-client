@@ -6,16 +6,16 @@ const useReviews = (reviewsUrl: string) => {
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [plateFilter, setPlateFilter] = useState<string>('');
 
-  const fetchReviews = async (url: string) => {
+  const fetchReviews = async () => {
     try {
-      const { data } = await AxiosService.get(url);
+      const { data } = await AxiosService.get(reviewsUrl);
       setReviews(data as ReviewType[]);
     } catch (error) {
       console.error('Failed to fetch reviews:', error);
     }
   };
   useEffect(() => {
-    fetchReviews(reviewsUrl);
+    fetchReviews();
   }, [reviewsUrl]);
 
   const filteredReviews = reviews.filter(r => r.plateNumber.includes(plateFilter));
@@ -24,7 +24,8 @@ const useReviews = (reviewsUrl: string) => {
     reviews: filteredReviews, 
     setReviews, 
     plateFilter,
-    setPlateFilter
+    setPlateFilter,
+    refetch: fetchReviews,
   };
 };
 

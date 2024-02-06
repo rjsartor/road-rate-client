@@ -77,7 +77,7 @@ export const StateSelect: React.FC<StateSelectProps> = ({ state, setState }) => 
           onChange={(e) => setState(e.target.value as StateCode)}
           aria-label='plate-state'
       >
-          <option value=''>State</option>
+          <option value=''>Select state</option>
           {STATES.map(s => (
               <option key={s.name} value={s.code}>{s.code}</option>
           ))}

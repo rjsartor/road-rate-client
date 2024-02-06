@@ -2,6 +2,7 @@ import React from 'react';
 import { StateCode, StateSelect } from '../common/StateSelect';
 import AxiosService from '../../services/AxiosService';
 import { PlateType } from '../../types/plates.types';
+import Spacer from '../common/Spacer';
 
 interface PlateSearchFormProps {
   searchState: StateCode;
@@ -42,10 +43,9 @@ const PlateSearchForm: React.FC<PlateSearchFormProps> = ({
       <form id="claim-search-form" onSubmit={fetchPlate}>
         <fieldset id="claim-plate-search">
           <legend>Search a Valid Plate by State</legend>
+          <Spacer height={1} />
           <article className="claim-plate-search-inputs">
-            <label htmlFor="claim-search" className="claim-search-label" aria-label="claim-search-form">
-              Search Plate Numbers:
-            </label>
+            <Spacer width={1} />
             <input
               value={searchNumber}
               onChange={e => setSearchNumber(e.target.value.toUpperCase())}
@@ -53,14 +53,15 @@ const PlateSearchForm: React.FC<PlateSearchFormProps> = ({
               id="claim-search"
               name="claim-search"
               className="claim-search-input"
-              placeholder="Search Plate Numbers"
+              placeholder="Search Plate Number"
               pattern="^[a-zA-Z0-9]{1,8}$"
               title="Plate number should be between 1 to 8 characters without special characters."
               aria-label="plate-number"
             />
-            <label className='plate-state-label' htmlFor='plate-state'></label>
+            <Spacer width={1} />
             <StateSelect state={searchState as StateCode} setState={setSearchState} />
           </article>
+          <Spacer height={1} />
           <button
             className="search-btn"
             aria-label="search-btn"
