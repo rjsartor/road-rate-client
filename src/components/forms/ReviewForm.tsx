@@ -3,6 +3,7 @@ import '../../styles/forms/review-form.css';
 import { StateCode, StateSelect } from '../common/StateSelect';
 import { usePlates } from '../../hooks/use-plates';
 import AxiosService from '../../services/AxiosService';
+import Spacer from '../common/Spacer';
 
 interface ReviewFormProps {
   userId: string;
@@ -92,6 +93,7 @@ const ReviewForm: FC<ReviewFormProps> = ({ userId, initialFormData = {}, handleS
           pattern='^[a-zA-Z0-9]{1,8}$'
           title='Plate number should be between 1 to 8 characters'
         />
+        <Spacer height={2} />
 
         <label htmlFor='rating'>Rating:</label>
         <select
@@ -104,10 +106,12 @@ const ReviewForm: FC<ReviewFormProps> = ({ userId, initialFormData = {}, handleS
           <option value='true'>Good</option>
           <option value='false'>Bad</option>
         </select>
+        <Spacer height={2} />
 
         <label htmlFor='plateState'>Select state:</label>
         <StateSelect state={formData.plateState as StateCode} setState={handleStateSelect} />
 
+        <Spacer height={2} />
         <label htmlFor='message'>Message:</label>
         <textarea
           id='review-message-input'
@@ -116,6 +120,7 @@ const ReviewForm: FC<ReviewFormProps> = ({ userId, initialFormData = {}, handleS
           value={formData.message}
           onChange={e => setFormData({ ...formData, message: e.target.value })}
         />
+        <Spacer height={2} />
 
         <button
           onClick={handleSubmit}

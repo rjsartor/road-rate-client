@@ -35,6 +35,7 @@ const MyPlatesList: FC = () => {
             <button
               key={index}
               onClick={() => myPlateClick(plate)}
+              className='plate-btn'
             >
               <LicensePlate plateNumber={plate.plateNumber} plateState={plate.plateState} style={{ height: 150, width: 300, fontSize: 72 }} />
             </button>

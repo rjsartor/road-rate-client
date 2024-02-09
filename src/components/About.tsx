@@ -53,7 +53,8 @@ export const About: FC = () => {
           <h5 id='about-footer'>Please not use RoadRate while operating a motor vehicle.</h5>
           <Spacer height={2} />
           <h4 onClick={() => loginWithRedirect()} className="register-link">Start your journey with RoadRate today!</h4>
-          <Spacer height={2} />
+          <h4>Explore as a guest using <span><strong>demo-user@gmail.com</strong></span> and <span><strong>demo-password123</strong></span></h4>
+          <Spacer height={4} />
           <Button />
       </div>
     );
