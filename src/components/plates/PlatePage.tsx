@@ -21,7 +21,7 @@ export const PlatePage: FC = () => {
   const handleSubmitReview = () => {
     setSubmitReview(false);
     refetch();
-  }
+  };
   
   useEffect(() => {
     if (!plate || !user) {
